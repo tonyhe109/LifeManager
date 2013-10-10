@@ -13,6 +13,7 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.view.Window;
 
 import com.lifemanager.R;
 import com.lifemanager.logging.Logger;
@@ -39,9 +40,8 @@ public class BootActivity extends Activity {
 
 		if (isNormalStartup()) {
 			LOG.debug("onCreate.");
-
-			super.setContentView(R.layout.loading);
-
+			requestWindowFeature(Window.FEATURE_NO_TITLE);
+			setContentView(R.layout.loading);
 			if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
 				mStartupTask.execute();
 				mTimeoutTask.execute();
@@ -51,7 +51,6 @@ public class BootActivity extends Activity {
 			}
 		} else {
 			LOG.info("application exit because of special startup.");
-
 			exit();
 		}
 	}
@@ -84,12 +83,11 @@ public class BootActivity extends Activity {
 
 	private boolean isNormalStartup() {
 		boolean result = true;
-
-		String sdcard = Environment.getExternalStorageDirectory().getPath();
-		File file = new File(sdcard + File.separator + ".kankan_silent");
-		if (file.exists()) {
-			result = !(file.delete());
-		}
+		// String sdcard = Environment.getExternalStorageDirectory().getPath();
+		// File file = new File(sdcard + File.separator + ".kankan_silent");
+		// if (file.exists()) {
+		// result = !(file.delete());
+		// }
 
 		return result;
 	}
@@ -98,11 +96,10 @@ public class BootActivity extends Activity {
 
 		@Override
 		protected Boolean doInBackground(Void... params) {
-			// 提前获取相关参数，以方便后续使用
-			Util.getPeerid(BootActivity.this);
-			Util.getSelfAppVersion(BootActivity.this);
-			Util.getIMEI(BootActivity.this);
-			DeviceHelper.loadScreenInfo(BootActivity.this);
+//			Util.getPeerid(BootActivity.this);
+//			Util.getSelfAppVersion(BootActivity.this);
+//			Util.getIMEI(BootActivity.this);
+//			DeviceHelper.loadScreenInfo(BootActivity.this);
 
 			return true;
 		}
