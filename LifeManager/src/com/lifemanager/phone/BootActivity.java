@@ -21,7 +21,7 @@ import com.lifemanager.phone.ui.TaskPanelActivity;
 import com.lifemanager.util.DeviceHelper;
 import com.lifemanager.util.Util;
 
-public class BootActivity extends Activity {
+public class BootActivity extends LMActivity {
 
 	private static final int MIN_SHOW_TIME = 2000;
 	private static final int MAX_SHOW_TIME = 10000;
@@ -30,17 +30,17 @@ public class BootActivity extends Activity {
 
 	@Override
 	public void onBackPressed() {
+		LOG.debug("onBackPressed ");
 		// TODO
 	}
 
 	@Override
 	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
+		super.onCreate(savedInstanceState, LMActivity.LOADING);
 
 		if (isNormalStartup()) {
 			LOG.debug("onCreate.");
-			requestWindowFeature(Window.FEATURE_NO_TITLE);
 			setContentView(R.layout.loading);
 			if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
 				mStartupTask.execute();
@@ -96,10 +96,10 @@ public class BootActivity extends Activity {
 
 		@Override
 		protected Boolean doInBackground(Void... params) {
-//			Util.getPeerid(BootActivity.this);
-//			Util.getSelfAppVersion(BootActivity.this);
-//			Util.getIMEI(BootActivity.this);
-//			DeviceHelper.loadScreenInfo(BootActivity.this);
+			// Util.getPeerid(BootActivity.this);
+			// Util.getSelfAppVersion(BootActivity.this);
+			// Util.getIMEI(BootActivity.this);
+			// DeviceHelper.loadScreenInfo(BootActivity.this);
 
 			return true;
 		}
@@ -134,6 +134,8 @@ public class BootActivity extends Activity {
 		protected void onPostExecute(Void result) {
 			finish();
 			startActivity(new Intent(BootActivity.this, TaskPanelActivity.class));
+			overridePendingTransition(android.R.anim.slide_in_left,
+					android.R.anim.slide_out_right);
 		};
 	};
 
