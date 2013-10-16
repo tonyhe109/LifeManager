@@ -1,43 +1,37 @@
 package com.lifemanager.phone;
 
-import java.io.File;
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
 import android.annotation.TargetApi;
-import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
-import android.view.Window;
 
 import com.lifemanager.R;
 import com.lifemanager.logging.Logger;
 import com.lifemanager.phone.ui.TaskPanelActivity;
-import com.lifemanager.util.DeviceHelper;
-import com.lifemanager.util.Util;
 
-public class BootActivity extends LMActivity {
+public class BootActivity extends LifeManagerActivity {
 
-	private static final int MIN_SHOW_TIME = 2000;
+	private static final int MIN_SHOW_TIME = 3500;
 	private static final int MAX_SHOW_TIME = 10000;
 
-	private static final Logger LOG = Logger.getLogger(BootActivity.class);
+	private static final Logger LOG = Logger.getLogger(LOADING.toString());
 
 	@Override
 	public void onBackPressed() {
 		LOG.debug("onBackPressed ");
-		// TODO
+		// do nothing here.
 	}
 
 	@Override
 	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState, LMActivity.LOADING);
+		super.onCreate(savedInstanceState, LifeManagerActivity.LOADING);
 
 		if (isNormalStartup()) {
 			LOG.debug("onCreate.");

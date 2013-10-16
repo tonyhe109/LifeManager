@@ -17,4 +17,8 @@ public class LifeManagerModule {
 		return _module_name;
 	}
 
+	public String toString() {
+		return _module_name;
+	}
+
 }

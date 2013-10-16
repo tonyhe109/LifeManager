@@ -1,13 +1,13 @@
 package com.lifemanager.phone;
 
-import com.lifemanager.improve.UserActionCollector;
-
-import android.app.Activity;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.view.Window;
 import android.view.WindowManager;
 
-public class LMActivity extends Activity{
+import com.lifemanager.improve.UserActionCollector;
+
+public class LifeManagerActivity extends FragmentActivity{
 
 	public static final LifeManagerModule LOADING = new LifeManagerModule(0,"LOADING");
 	public static final LifeManagerModule MAIN_TASK_PANEL = new LifeManagerModule(1,"MAIN_TASK_PANEL");
