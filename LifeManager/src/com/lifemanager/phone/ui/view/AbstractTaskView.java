@@ -3,7 +3,7 @@ package com.lifemanager.phone.ui.view;
 import android.content.Context;
 import android.view.ViewGroup;
 
-public class AbstractTaskView extends ViewGroup{
+public abstract class AbstractTaskView extends ViewGroup{
 
 	public AbstractTaskView(Context context) {
 		super(context);
