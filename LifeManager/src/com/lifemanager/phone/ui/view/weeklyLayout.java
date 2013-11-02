@@ -1,12 +1,13 @@
 package com.lifemanager.phone.ui.view;
 
 import android.content.Context;
-import android.view.View;
 
-public class MenuView extends View{
-
-	public MenuView(Context context) {
+public class weeklyLayout extends AbstractTaskLayout{
+	
+	public weeklyLayout(Context context) {
 		super(context);
 	}
+	
+	
 
 }

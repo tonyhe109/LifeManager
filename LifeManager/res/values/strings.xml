@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
+	<!--default  -->
     <string name="app_name">LifeManager</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
-
+	<!--loading Activity  -->
+	<string name="life_manager">Manager Your Life</string>
 </resources>

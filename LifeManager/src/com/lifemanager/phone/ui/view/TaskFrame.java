@@ -17,11 +17,19 @@ public class TaskFrame extends RelativeLayout {
 
 	//
 	private int _state = 0;
-
 	//
-	private SlidingView _slidingView = null;
+	private static SlidingView _slidingView = null;
 	//
 	private static View _menuView;
+	//
+	private View _defaultTaskView = TaskViewManager.getTaskViewManager()
+			.createDefaultTaskView();
+	//
+	private final LayoutParams BEHIND_PARAMS = new LayoutParams(
+			LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT);
+	//
+	private final LayoutParams ABOVE_PARAMS = new LayoutParams(
+			LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
 
 	public TaskFrame(Context context) {
 		super(context);
@@ -29,35 +37,24 @@ public class TaskFrame extends RelativeLayout {
 	}
 
 	public void init() {
-		_menuView = new MenuView(null);
-		setMenuView(_menuView);
+		// init menu view
+		if (_menuView == null) {
+			_menuView = new MenuView(getContext());
+			BEHIND_PARAMS.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+			addView(_menuView, BEHIND_PARAMS);
+		}
+		// init task view panel
+		if (_slidingView == null) {
+			_slidingView = new SlidingView(getContext());
+			_slidingView.setView(_defaultTaskView);
+			addView(_slidingView, ABOVE_PARAMS);
+		}
+
 	}
 
 	public void addTaskView(View taskView) {
-		// setTaskView(taskView);
-		LayoutParams aboveParams = new LayoutParams(LayoutParams.MATCH_PARENT,
-				LayoutParams.MATCH_PARENT);
-		_slidingView = new SlidingView(getContext());
-		_slidingView.setView(taskView);
-		addView(_slidingView, aboveParams);
+		_slidingView.setView(_defaultTaskView);
 		_slidingView.invalidate();
-	}
-
-	// public void setTaskView(View taskView) {
-	// LayoutParams aboveParams = new LayoutParams(LayoutParams.MATCH_PARENT,
-	// LayoutParams.MATCH_PARENT);
-	// _slidingView = new SlidingView(getContext());
-	// _slidingView.setView(taskView);
-	// addView(_slidingView, aboveParams);
-	// _slidingView.invalidate();
-	// }
-
-	private void setMenuView(View menu) {
-		LayoutParams behindParams = new LayoutParams(LayoutParams.WRAP_CONTENT,
-				LayoutParams.MATCH_PARENT);
-		behindParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);// 在父
-		addView(menu, behindParams);
-		_menuView = menu;
 	}
 
 	public void showTaskView() {
@@ -197,10 +194,10 @@ public class TaskFrame extends RelativeLayout {
 					return false;
 				}
 
-//				if (getScrollX() == getDetailViewWidth()
-//						&& mLastMotionX > getMenuViewWidth()) {
-//					return false;
-//				}
+				// if (getScrollX() == getDetailViewWidth()
+				// && mLastMotionX > getMenuViewWidth()) {
+				// return false;
+				// }
 
 				break;
 			case MotionEvent.ACTION_MOVE:
@@ -219,17 +216,17 @@ public class TaskFrame extends RelativeLayout {
 						} else if (scrollX < rightBound) {
 							scrollX = rightBound;
 						}
-					} 
-//					else if (deltaX > 0 && oldScrollX > 0) { // right view
-//						final float rightBound = getDetailViewWidth();
-//						final float leftBound = 0;
-//						if (scrollX < leftBound) {
-//							scrollX = leftBound;
-//						} else if (scrollX > rightBound) {
-//							scrollX = rightBound;
-//						}
-//
-//					}
+					}
+					// else if (deltaX > 0 && oldScrollX > 0) { // right view
+					// final float rightBound = getDetailViewWidth();
+					// final float leftBound = 0;
+					// if (scrollX < leftBound) {
+					// scrollX = leftBound;
+					// } else if (scrollX > rightBound) {
+					// scrollX = rightBound;
+					// }
+					//
+					// }
 					scrollTo((int) scrollX, getScrollY());
 				}
 				break;
@@ -252,15 +249,15 @@ public class TaskFrame extends RelativeLayout {
 							dx = -oldScrollX;
 						}
 					}
-//					else {
-//						if (oldScrollX > getDetailViewWidth() / 2
-//								|| velocityX < -SNAP_VELOCITY) {
-//							dx = getDetailViewWidth() - oldScrollX;
-//						} else if (oldScrollX <= getDetailViewWidth() / 2
-//								|| velocityX > SNAP_VELOCITY) {
-//							dx = -oldScrollX;
-//						}
-//					}
+					// else {
+					// if (oldScrollX > getDetailViewWidth() / 2
+					// || velocityX < -SNAP_VELOCITY) {
+					// dx = getDetailViewWidth() - oldScrollX;
+					// } else if (oldScrollX <= getDetailViewWidth() / 2
+					// || velocityX > SNAP_VELOCITY) {
+					// dx = -oldScrollX;
+					// }
+					// }
 					smoothScrollTo(dx);
 					clearChildrenCache();
 
