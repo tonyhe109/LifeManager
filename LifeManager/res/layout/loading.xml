@@ -11,13 +11,20 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_weight="0.8"
+        android:layout_weight="0.7"
         android:gravity="center"
         android:text="@string/life_manager"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="#000000"
         android:textSize="40sp" />
-
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.1"
+        android:gravity="center"
+        android:text="@string/tips"
+        android:textColor="#000000"
+        android:textSize="14sp" />
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
