@@ -2,9 +2,9 @@ package com.lifemanager.phone.ui;
 
 import android.os.Bundle;
 
-import com.lifemanager.R;
 import com.lifemanager.logging.Logger;
 import com.lifemanager.phone.LifeManagerActivity;
+import com.lifemanager.phone.ui.view.TaskFrame;
 
 public class TaskPanelActivity extends LifeManagerActivity {
 	private static final Logger LOG = Logger
@@ -12,7 +12,33 @@ public class TaskPanelActivity extends LifeManagerActivity {
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState, LifeManagerActivity.MAIN_TASK_PANEL);
-		super.setContentView(R.layout.task_panel);
+		TaskFrame layout = new TaskFrame(this);
+		setContentView(layout);
+	}
+	
+	
+	@Override
+	public void onBackPressed() {
+		LOG.debug("onBackPressed ");
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+
+		// MobclickAgent.onResume(this);
+	}
+
+	@Override
+	protected void onPause() {
+		super.onPause();
+
+		// MobclickAgent.onPause(this);
+	}
+
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
 	}
 
 }

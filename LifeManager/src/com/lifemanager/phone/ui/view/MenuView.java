@@ -8,5 +8,6 @@ public class MenuView extends View{
 	public MenuView(Context context) {
 		super(context);
 	}
-
+	
+	
 }
