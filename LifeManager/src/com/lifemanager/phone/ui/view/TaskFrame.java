@@ -1,7 +1,6 @@
 package com.lifemanager.phone.ui.view;
 
 import android.content.Context;
-import android.graphics.Canvas;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -16,7 +15,7 @@ import android.widget.Scroller;
 public class TaskFrame extends RelativeLayout {
 
 	//
-	private int _state = 0;
+	// private int _state = 0;
 	//
 	private static SlidingView _slidingView = null;
 	//
@@ -33,23 +32,42 @@ public class TaskFrame extends RelativeLayout {
 
 	public TaskFrame(Context context) {
 		super(context);
-		init();
 	}
 
-	public void init() {
-		// init menu view
-		if (_menuView == null) {
-			_menuView = new MenuView(getContext());
-			BEHIND_PARAMS.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
-			addView(_menuView, BEHIND_PARAMS);
-		}
-		// init task view panel
-		if (_slidingView == null) {
-			_slidingView = new SlidingView(getContext());
-			_slidingView.setView(_defaultTaskView);
-			addView(_slidingView, ABOVE_PARAMS);
-		}
+	public TaskFrame(Context context, AttributeSet attrs) {
+		super(context, attrs);
+	}
 
+	public TaskFrame(Context context, AttributeSet attrs, int defStyle) {
+		super(context, attrs, defStyle);
+	}
+
+//	private void init() {
+//		// // init menu view
+//		// if (_menuView == null) {
+//		// _menuView = new MenuView(getContext());
+//		// BEHIND_PARAMS.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+//		// addView(_menuView, BEHIND_PARAMS);
+//		// }
+//		// // init task view panel
+//		// if (_slidingView == null) {
+//		// _slidingView = new SlidingView(getContext());
+//		// _slidingView.setView(_defaultTaskView);
+//		// addView(_slidingView, ABOVE_PARAMS);
+//		// }
+//	}
+
+	public void setMenuView(View view) {
+		_menuView = new MenuView(getContext());
+		BEHIND_PARAMS.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+		addView(_menuView, BEHIND_PARAMS);
+	}
+
+	public void setTaskView(View view) {
+		_slidingView = new SlidingView(getContext());
+		_slidingView.setView(view);
+		addView(_slidingView, ABOVE_PARAMS);
+		_slidingView.invalidate();
 	}
 
 	public void addTaskView(View taskView) {
