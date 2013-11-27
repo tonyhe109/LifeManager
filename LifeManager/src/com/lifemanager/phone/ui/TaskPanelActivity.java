@@ -29,12 +29,12 @@ public class TaskPanelActivity extends LifeManagerActivity {
 		taskFrame.setTaskView(getLayoutInflater().inflate(
 				R.layout.task_frame, null));
 		LOG.debug("111.............");
-		ft = this.getSupportFragmentManager().beginTransaction();
 		rightFragment = new RightFragment();
-		ft.replace(R.id.right_frame, rightFragment);
 		taskFragment = new SampleListFragment();
-		ft.replace(R.id.task_frame, taskFragment);
 		LOG.debug("444.............");
+		ft = this.getSupportFragmentManager().beginTransaction();
+		ft.replace(R.id.right_frame, rightFragment);
+		ft.replace(R.id.task_frame, taskFragment);
 		ft.commit();
 		LOG.debug("5555.............");
 	}

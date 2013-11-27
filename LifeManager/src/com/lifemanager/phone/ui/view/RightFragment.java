@@ -13,9 +13,9 @@ public class RightFragment extends Fragment {
 
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		System.out.println("----->" + "fuck");
+		Log.e("---------------------------------------------------->" , "fuck");
 		View view = inflater.inflate(R.layout.menu_fragment, null);
-		Log.d("<-----" ,"");
+		Log.e("<----------------------------------------------------" ,"");
 		return view;
 	}
 

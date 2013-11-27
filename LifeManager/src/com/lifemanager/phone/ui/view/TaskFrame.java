@@ -58,9 +58,10 @@ public class TaskFrame extends RelativeLayout {
 //	}
 
 	public void setMenuView(View view) {
-		_menuView = new MenuView(getContext());
+		//_menuView = new MenuView(getContext());
+		_menuView = view;
 		BEHIND_PARAMS.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
-		addView(_menuView, BEHIND_PARAMS);
+		addView(view, BEHIND_PARAMS);
 	}
 
 	public void setTaskView(View view) {
