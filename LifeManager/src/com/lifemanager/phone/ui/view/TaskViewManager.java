@@ -1,27 +1,30 @@
 package com.lifemanager.phone.ui.view;
 
-import android.view.View;
-
 public class TaskViewManager {
-	
+
 	private static final TaskViewManager _viewManager = new TaskViewManager();
 
 	private TaskViewManager() {
-	
+
 	}
-	
-	public static TaskViewManager getTaskViewManager(){
+
+	public static TaskViewManager getTaskViewManager() {
 		return _viewManager;
 	}
-	
-	public View createDefaultTaskView(){
-		
-		return null;
+
+	public TaskFragment getDefaultTaskFragment() {
+
+		return new SingalDayTaskFragment();
 	}
-	
-	public View createSingleDayTaskView (){
-		
-		return null;
+
+	public TaskFragment getSingleDayTaskFragment() {
+
+		return new SingalDayTaskFragment();
+	}
+
+	public TaskFragment getWeeklyTaskFragment() {
+
+		return new SingalDayTaskFragment();
 	}
 
 }

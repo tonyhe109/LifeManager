@@ -19,7 +19,7 @@ import android.widget.SimpleAdapter;
 import com.lifemanager.R;
 import com.lifemanager.phone.ui.TaskPanelActivity;
 
-public class SampleListFragment extends ListFragment {
+public class TaskFragment extends ListFragment {
 	private ImageView lv_left;
 	private ImageView iv_right;
 
