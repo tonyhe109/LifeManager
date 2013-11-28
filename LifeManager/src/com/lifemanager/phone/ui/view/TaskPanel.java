@@ -12,17 +12,12 @@ import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 import android.widget.Scroller;
 
-public class TaskFrame extends RelativeLayout {
+public class TaskPanel extends RelativeLayout {
 
 	//
-	// private int _state = 0;
-	//
-	private static SlidingView _slidingView = null;
+	private static SlidingTaskFrame _slidingView = null;
 	//
 	private static View _menuView;
-	//
-	private View _defaultTaskView = TaskViewManager.getTaskViewManager()
-			.createDefaultTaskView();
 	//
 	private final LayoutParams BEHIND_PARAMS = new LayoutParams(
 			LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT);
@@ -30,15 +25,15 @@ public class TaskFrame extends RelativeLayout {
 	private final LayoutParams ABOVE_PARAMS = new LayoutParams(
 			LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
 
-	public TaskFrame(Context context) {
+	public TaskPanel(Context context) {
 		super(context);
 	}
 
-	public TaskFrame(Context context, AttributeSet attrs) {
+	public TaskPanel(Context context, AttributeSet attrs) {
 		super(context, attrs);
 	}
 
-	public TaskFrame(Context context, AttributeSet attrs, int defStyle) {
+	public TaskPanel(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
 	}
 
@@ -58,21 +53,20 @@ public class TaskFrame extends RelativeLayout {
 //	}
 
 	public void setMenuView(View view) {
-		//_menuView = new MenuView(getContext());
 		_menuView = view;
 		BEHIND_PARAMS.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
 		addView(view, BEHIND_PARAMS);
 	}
 
 	public void setTaskView(View view) {
-		_slidingView = new SlidingView(getContext());
+		_slidingView = new SlidingTaskFrame(getContext());
 		_slidingView.setView(view);
 		addView(_slidingView, ABOVE_PARAMS);
 		_slidingView.invalidate();
 	}
 
 	public void addTaskView(View taskView) {
-		_slidingView.setView(_defaultTaskView);
+		_slidingView.setView(taskView);
 		_slidingView.invalidate();
 	}
 
@@ -88,7 +82,7 @@ public class TaskFrame extends RelativeLayout {
 		_slidingView.switchMenuView();
 	}
 
-	private static class SlidingView extends ViewGroup {
+	private static class SlidingTaskFrame extends ViewGroup {
 
 		private FrameLayout mContainer;
 		private Scroller mScroller;
@@ -98,7 +92,7 @@ public class TaskFrame extends RelativeLayout {
 		private float mLastMotionY;
 		private static final int SNAP_VELOCITY = 1000;
 
-		public SlidingView(Context context) {
+		public SlidingTaskFrame(Context context) {
 			super(context);
 			init();
 		}

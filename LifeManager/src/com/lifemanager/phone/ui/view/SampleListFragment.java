@@ -61,6 +61,8 @@ public class SampleListFragment extends ListFragment {
 		item7.put("list_title", getString(R.string.title1));
 		item7.put("list_image", R.drawable.p7);
 		item7.put("list_contect", getString(R.string.test));
+		
+		
 		List<Map<String, Object>> data = new ArrayList<Map<String, Object>>();
 		data.add(item1);
 		data.add(item2);
@@ -77,9 +79,7 @@ public class SampleListFragment extends ListFragment {
 		SimpleAdapter adapter = new SimpleAdapter(getActivity(), data,
 				R.layout.list_item, from, to);
 		setListAdapter(adapter);
-
 		iv_right.setOnClickListener(new OnClickListener() {
-
 			public void onClick(View v) {
 				((TaskPanelActivity) getActivity()).showMenuView();
 			}
@@ -90,7 +90,5 @@ public class SampleListFragment extends ListFragment {
 	public void onListItemClick(ListView l, View v, int position, long id) {
 		super.onListItemClick(l, v, position, id);
 		Log.d("----->", position + "");
-//		Intent intent = new Intent(getActivity(), DetailsActivity.class);
-//		startActivity(intent);
 	}
 }
