@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/menu_panel"
+    android:layout_width="150dip"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="150dip"
+        android:layout_height="40dip"
+        android:gravity="center"
+        android:orientation="vertical" >
+
+        <!-- android:background="@drawable/oper_title" -->
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="LIFE"
+            android:textColor="#000"
+            android:textSize="17dip" />
+    </LinearLayout>
+      <TextView
+                android:layout_width="150dip"
+                android:layout_height="2dip"
+                android:background="#333333" />
+
+    <ScrollView
+        android:layout_width="150dip"
+        android:layout_height="fill_parent" >
+
+        <!-- android:background="@drawable/booklist_menu_bg_unit" -->
+
+        <LinearLayout
+            android:layout_width="150dip"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="5dip" >
+
+            <LinearLayout
+                android:id="@+id/llr_energy_management"
+                android:layout_width="match_parent"
+                android:layout_height="40dip"
+                android:clickable="true"
+                android:onClick="llronclick" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="0.9"
+                    android:text="TodayTask"
+                    android:textColor="#000" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="0.1"
+                    android:gravity="center"
+                    android:src="@drawable/arrow_to_right" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="150dip"
+                android:layout_height="1dip"
+                android:background="#333333" />
+
+            <LinearLayout
+                android:id="@+id/llr_hr_management"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:clickable="true"
+                android:onClick="llronclick" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="0.9"
+                    android:text="WeeklyTask"
+                    android:textColor="#000" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="0.1"
+                    android:gravity="center"
+                    android:src="@drawable/arrow_to_right" />
+            </LinearLayout>
+
+        <TextView
+                android:layout_width="150dip"
+                android:layout_height="1dip"
+                android:background="#333333" />
+
+            <LinearLayout
+                android:id="@+id/llr_purchasing_management"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:clickable="true"
+                android:onClick="llronclick" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="0.9"
+                    android:text="Setting"
+                    android:textColor="#000" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="0.1"
+                    android:gravity="center"
+                    android:src="@drawable/arrow_to_right" />
+            </LinearLayout>
+
+           <TextView
+                android:layout_width="150dip"
+                android:layout_height="1dip"
+                android:background="#333333" />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
