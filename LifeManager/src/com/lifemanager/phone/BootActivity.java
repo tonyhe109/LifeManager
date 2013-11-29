@@ -17,7 +17,7 @@ import com.lifemanager.phone.ui.TaskPanelActivity;
 
 public class BootActivity extends LifeManagerActivity {
 
-	private static final int MIN_SHOW_TIME = 3500;
+	private static final int MIN_SHOW_TIME = 1500;
 	private static final int MAX_SHOW_TIME = 10000;
 
 	private static final Logger LOG = Logger.getLogger(LOADING.toString());
