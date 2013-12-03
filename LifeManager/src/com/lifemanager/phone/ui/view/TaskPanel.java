@@ -1,5 +1,7 @@
 package com.lifemanager.phone.ui.view;
 
+import com.lifemanager.logging.Logger;
+
 import android.content.Context;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -13,7 +15,7 @@ import android.widget.RelativeLayout;
 import android.widget.Scroller;
 
 public class TaskPanel extends RelativeLayout {
-
+	protected static final Logger LOG = Logger.getLogger("TaskPanel");
 	//
 	private static SlidingTaskFrame _slidingView = null;
 	//
@@ -36,21 +38,6 @@ public class TaskPanel extends RelativeLayout {
 	public TaskPanel(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
 	}
-
-//	private void init() {
-//		// // init menu view
-//		// if (_menuView == null) {
-//		// _menuView = new MenuView(getContext());
-//		// BEHIND_PARAMS.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
-//		// addView(_menuView, BEHIND_PARAMS);
-//		// }
-//		// // init task view panel
-//		// if (_slidingView == null) {
-//		// _slidingView = new SlidingView(getContext());
-//		// _slidingView.setView(_defaultTaskView);
-//		// addView(_slidingView, ABOVE_PARAMS);
-//		// }
-//	}
 
 	public void setMenuView(View view) {
 		_menuView = view;
@@ -186,6 +173,7 @@ public class TaskPanel extends RelativeLayout {
 		@Override
 		public boolean onTouchEvent(MotionEvent ev) {
 
+			LOG.info("onTouchEvent:"+ev.toString());
 			if (mVelocityTracker == null) {
 				mVelocityTracker = VelocityTracker.obtain();
 			}
@@ -194,7 +182,7 @@ public class TaskPanel extends RelativeLayout {
 			final int action = ev.getAction();
 			final float x = ev.getX();
 			final float y = ev.getY();
-
+			
 			switch (action) {
 			case MotionEvent.ACTION_DOWN:
 				if (!mScroller.isFinished()) {

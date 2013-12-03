@@ -46,13 +46,10 @@
 
     <!-- task view -->
 
-    <LinearLayout
-        android:id="@+id/task"
-        android:layout_width="match_parent"
-        android:layout_weight="0.9"
-        android:gravity="center"
-         android:background="#999999"
-        android:orientation="vertical" >
-    </LinearLayout>
+    <ListView
+        android:id="@android:id/list"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+    </ListView>
 
 </LinearLayout>

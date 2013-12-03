@@ -2,6 +2,7 @@ package com.lifemanager.phone.ui;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
+import android.view.View;
 
 import com.lifemanager.R;
 import com.lifemanager.logging.Logger;
@@ -22,12 +23,13 @@ public class TaskPanelActivity extends LifeManagerActivity {
 		super.onCreate(savedInstanceState, LifeManagerActivity.MAIN_TASK_PANEL);
 		setContentView(R.layout.taskpanel);
 		_taskPanel = (TaskPanel) findViewById(R.id.taskFrame);
-		_taskPanel.setMenuView(getLayoutInflater().inflate(R.layout.menu_frame,
-				null));
-		_taskPanel.setTaskView(getLayoutInflater().inflate(R.layout.task_frame,
-				null));
+		View _menuView = getLayoutInflater().inflate(R.layout.menu_frame,
+				null);
+		View _taskView = getLayoutInflater().inflate(R.layout.task_frame,
+				null);
+		_taskPanel.setMenuView(_menuView);
+		_taskPanel.setTaskView(_taskView);
 		MenuFragment _menuFragment = new MenuFragment();
-		// taskFragment = new SampleListFragment();
 		TaskFragment _taskFragment = TaskViewManager.getTaskViewManager()
 				.getDefaultTaskFragment();
 		ft = this.getSupportFragmentManager().beginTransaction();

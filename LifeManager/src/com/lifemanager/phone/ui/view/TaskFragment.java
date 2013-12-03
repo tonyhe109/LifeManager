@@ -15,24 +15,30 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.TextView;
 
 import com.lifemanager.R;
+import com.lifemanager.logging.Logger;
 import com.lifemanager.phone.ui.TaskPanelActivity;
 
 public class TaskFragment extends ListFragment {
+	protected static final Logger LOG = Logger.getLogger("TaskFragment");
 	private ImageView lv_left;
 	private ImageView iv_right;
-
+	protected TextView _taskPanelTitle;
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
+		LOG.debug("TaskFragment.onCreateView");
 		View mView = inflater.inflate(R.layout.list, null);
 		lv_left = (ImageView) mView.findViewById(R.id.iv_left);
 		iv_right = (ImageView) mView.findViewById(R.id.iv_right);
+		_taskPanelTitle = (TextView) mView.findViewById(R.id.iv_title);
 		return mView;
 	}
 
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
+		LOG.debug("TaskFragment.onActivityCreated");
 		Map<String, Object> item1 = new HashMap<String, Object>();
 		item1.put("list_title", getString(R.string.title1));
 		item1.put("list_image", R.drawable.p1);
@@ -61,8 +67,7 @@ public class TaskFragment extends ListFragment {
 		item7.put("list_title", getString(R.string.title1));
 		item7.put("list_image", R.drawable.p7);
 		item7.put("list_contect", getString(R.string.test));
-		
-		
+
 		List<Map<String, Object>> data = new ArrayList<Map<String, Object>>();
 		data.add(item1);
 		data.add(item2);
