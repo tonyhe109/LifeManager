@@ -25,7 +25,6 @@ public class BootActivity extends LifeManagerActivity {
 	@Override
 	public void onBackPressed() {
 		LOG.debug("onBackPressed ");
-		// do nothing here.
 	}
 
 	@Override

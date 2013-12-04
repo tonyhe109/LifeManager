@@ -14,10 +14,12 @@ import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 import android.widget.Scroller;
 
-public class TaskPanel extends RelativeLayout {
-	protected static final Logger LOG = Logger.getLogger("TaskPanel");
+public class MainPanel extends RelativeLayout {
+	protected static final Logger LOG = Logger.getLogger("MainPanel");
 	//
 	private static SlidingTaskFrame _slidingView = null;
+	//
+	private static boolean _abs_move_feature_eneable = false;
 	//
 	private static View _menuView;
 	//
@@ -27,15 +29,15 @@ public class TaskPanel extends RelativeLayout {
 	private final LayoutParams ABOVE_PARAMS = new LayoutParams(
 			LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
 
-	public TaskPanel(Context context) {
+	public MainPanel(Context context) {
 		super(context);
 	}
 
-	public TaskPanel(Context context, AttributeSet attrs) {
+	public MainPanel(Context context, AttributeSet attrs) {
 		super(context, attrs);
 	}
 
-	public TaskPanel(Context context, AttributeSet attrs, int defStyle) {
+	public MainPanel(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
 	}
 
@@ -61,11 +63,12 @@ public class TaskPanel extends RelativeLayout {
 		_slidingView.hideMenuView();
 	}
 
-	public void showMenuView() {
-		_slidingView.showMenuView();
+	public void onMenuButtonClick() {
+		LOG.debug("onMenuButtonClick function called ... ");
+		switchMenuView();
 	}
 
-	public void switchMenuView() {
+	private void switchMenuView() {
 		_slidingView.switchMenuView();
 	}
 
@@ -173,7 +176,6 @@ public class TaskPanel extends RelativeLayout {
 		@Override
 		public boolean onTouchEvent(MotionEvent ev) {
 
-			LOG.info("onTouchEvent:"+ev.toString());
 			if (mVelocityTracker == null) {
 				mVelocityTracker = VelocityTracker.obtain();
 			}
@@ -182,9 +184,10 @@ public class TaskPanel extends RelativeLayout {
 			final int action = ev.getAction();
 			final float x = ev.getX();
 			final float y = ev.getY();
-			
+
 			switch (action) {
 			case MotionEvent.ACTION_DOWN:
+				LOG.info("onTouchEvent:ACTION_DOWN");
 				if (!mScroller.isFinished()) {
 					mScroller.abortAnimation();
 				}
@@ -202,37 +205,44 @@ public class TaskPanel extends RelativeLayout {
 
 				break;
 			case MotionEvent.ACTION_MOVE:
+				LOG.info("onTouchEvent:ACTION_MOVE");
 				if (mIsBeingDragged) {
 					enableChildrenCache();
 					final float deltaX = mLastMotionX - x;
 					mLastMotionX = x;
 					float oldScrollX = getScrollX();
 					float scrollX = oldScrollX + deltaX;
-
-					if (deltaX < 0 && oldScrollX < 0) { // left view
-						final float leftBound = 0;
-						final float rightBound = -getMenuViewWidth();
-						if (scrollX > leftBound) {
-							scrollX = leftBound;
-						} else if (scrollX < rightBound) {
-							scrollX = rightBound;
+					if (_abs_move_feature_eneable) {
+						if (deltaX < 0) {// move to right
+							scrollTo(0, getScrollY());
+							//smoothScrollTo(0);
+						} else if (deltaX > 0) {// move to left
+							scrollTo(getMenuViewWidth(), getScrollY());
+							//smoothScrollTo(getMenuViewWidth());
 						}
+
+					} else {
+						if (deltaX < 0 && oldScrollX < 0) {// move to right
+							if (scrollX > 0) {
+							} else {
+								scrollX = oldScrollX;
+							}
+
+						} else if (deltaX > 0 && oldScrollX >= 0) {// move to
+																	// left
+							if (scrollX < getMenuViewWidth()) {
+							} else {
+								scrollX = getMenuViewWidth();
+							}
+						}
+						scrollTo((int) scrollX, getScrollY());
 					}
-					// else if (deltaX > 0 && oldScrollX > 0) { // right view
-					// final float rightBound = getDetailViewWidth();
-					// final float leftBound = 0;
-					// if (scrollX < leftBound) {
-					// scrollX = leftBound;
-					// } else if (scrollX > rightBound) {
-					// scrollX = rightBound;
-					// }
-					//
-					// }
-					scrollTo((int) scrollX, getScrollY());
 				}
 				break;
 			case MotionEvent.ACTION_CANCEL:
+				LOG.info("onTouchEvent:ACTION_CANCEL");
 			case MotionEvent.ACTION_UP:
+				LOG.info("onTouchEvent:ACTION_UP");
 				if (mIsBeingDragged) {
 					final VelocityTracker velocityTracker = mVelocityTracker;
 					velocityTracker.computeCurrentVelocity(1000);

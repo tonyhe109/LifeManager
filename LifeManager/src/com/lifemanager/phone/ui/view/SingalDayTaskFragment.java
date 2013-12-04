@@ -14,9 +14,9 @@ public class SingalDayTaskFragment extends TaskFragment {
 	}
 	
 	public void onActivityCreated(Bundle savedInstanceState) {
-		LOG.debug("SingalDayTaskFragment.onActivityCreated");
 		super.onActivityCreated(savedInstanceState);
-		//
+		LOG.debug("SingalDayTaskFragment.onActivityCreated");
 		_taskPanelTitle.setText("Singal Day Tasks");
+		LOG.debug("TaskFragment.onActivityCreated");
 	}
 }

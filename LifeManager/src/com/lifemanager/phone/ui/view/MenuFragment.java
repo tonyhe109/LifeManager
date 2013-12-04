@@ -12,7 +12,7 @@ public class MenuFragment extends Fragment {
 
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.menu_panel, null);
+		View view = inflater.inflate(R.layout.menu_frame, null);
 		return view;
 	}
 
