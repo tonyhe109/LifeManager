@@ -57,8 +57,8 @@ public class TaskPanelActivity extends LifeManagerActivity {
 		super.onDestroy();
 	}
 
-	public void onMenuButtonClick() {
-		_taskPanel.onMenuButtonClick();
+	public void onMenuActionIconClick() {
+		_taskPanel.onMenuActionIconClick();
 	}
 	
 	public void onSwitchModeButtonClick(){

@@ -1,10 +1,7 @@
 package com.lifemanager.phone.ui.view;
 
-import com.lifemanager.logging.Logger;
-
 import android.content.Context;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.VelocityTracker;
 import android.view.View;
@@ -13,6 +10,8 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 import android.widget.Scroller;
+
+import com.lifemanager.logging.Logger;
 
 public class MainPanel extends RelativeLayout {
 	protected static final Logger LOG = Logger.getLogger("MainPanel");
@@ -63,16 +62,18 @@ public class MainPanel extends RelativeLayout {
 		_slidingView.hideMenuView();
 	}
 
-	public void onMenuButtonClick() {
-		LOG.debug("onMenuButtonClick function called ... ");
+	public void onMenuActionIconClick() {
+		LOG.debug("onMenuActionIconClick function called ... ");
 		switchMenuView();
 	}
 
 	private void switchMenuView() {
 		_slidingView.switchMenuView();
+		LOG.debug("_menuView.request focus ");
+		_menuView.requestFocus();
 	}
 
-	private static class SlidingTaskFrame extends ViewGroup {
+	private static class SlidingTaskFrame extends ViewGroup  {
 
 		private FrameLayout mContainer;
 		private Scroller mScroller;
@@ -85,6 +86,14 @@ public class MainPanel extends RelativeLayout {
 		public SlidingTaskFrame(Context context) {
 			super(context);
 			init();
+			this.setOnClickListener(new View.OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					LOG.debug("onClick::::"+v);
+					LOG.debug(""+SlidingTaskFrame.this.getRight() + "X :" + SlidingTaskFrame.this.getLeft());
+				}
+			});
 		}
 
 		@Override
@@ -157,7 +166,7 @@ public class MainPanel extends RelativeLayout {
 				mLastMotionX = x;
 				mLastMotionY = y;
 				mIsBeingDragged = false;
-				break;
+				return mIsBeingDragged;
 
 			case MotionEvent.ACTION_MOVE:
 				final float dx = x - mLastMotionX;
@@ -167,15 +176,17 @@ public class MainPanel extends RelativeLayout {
 					mIsBeingDragged = true;
 					mLastMotionX = x;
 				}
-				break;
-
+				return mIsBeingDragged;
+			case MotionEvent.ACTION_UP:
+				return false;
 			}
-			return mIsBeingDragged;
-		}
 
+			return false;
+		}
+		
 		@Override
 		public boolean onTouchEvent(MotionEvent ev) {
-
+			LOG.debug("####"+SlidingTaskFrame.this.getRight() + "X :" + SlidingTaskFrame.this.getLeft());
 			if (mVelocityTracker == null) {
 				mVelocityTracker = VelocityTracker.obtain();
 			}
@@ -187,16 +198,16 @@ public class MainPanel extends RelativeLayout {
 
 			switch (action) {
 			case MotionEvent.ACTION_DOWN:
-				LOG.info("onTouchEvent:ACTION_DOWN");
-				if (!mScroller.isFinished()) {
-					mScroller.abortAnimation();
-				}
-				mLastMotionX = x;
-				mLastMotionY = y;
-				if (getScrollX() == -getMenuViewWidth()
-						&& mLastMotionX < getMenuViewWidth()) {
-					return false;
-				}
+				LOG.info("onTouchEvent:ACTION_DOWN ");
+				// if (!mScroller.isFinished()) {
+				// mScroller.abortAnimation();
+				// }
+				// mLastMotionX = x;
+				// mLastMotionY = y;
+				// if (getScrollX() == -getMenuViewWidth()
+				// && mLastMotionX < getMenuViewWidth()) {
+				// return false;
+				// }
 
 				// if (getScrollX() == getDetailViewWidth()
 				// && mLastMotionX > getMenuViewWidth()) {
@@ -205,83 +216,63 @@ public class MainPanel extends RelativeLayout {
 
 				break;
 			case MotionEvent.ACTION_MOVE:
-				LOG.info("onTouchEvent:ACTION_MOVE");
+				LOG.info("onTouchEvent:ACTION_MOVE & mIsBeingDragged:"
+						+ mIsBeingDragged);
 				if (mIsBeingDragged) {
 					enableChildrenCache();
 					final float deltaX = mLastMotionX - x;
 					mLastMotionX = x;
 					float oldScrollX = getScrollX();
 					float scrollX = oldScrollX + deltaX;
-					if (_abs_move_feature_eneable) {
-						if (deltaX < 0) {// move to right
-							scrollTo(0, getScrollY());
-							//smoothScrollTo(0);
-						} else if (deltaX > 0) {// move to left
-							scrollTo(getMenuViewWidth(), getScrollY());
-							//smoothScrollTo(getMenuViewWidth());
+					if (deltaX < 0 && oldScrollX < 0) {// move to right
+						if (scrollX > 0) {
+						} else {
+							scrollX = oldScrollX;
 						}
-
-					} else {
-						if (deltaX < 0 && oldScrollX < 0) {// move to right
-							if (scrollX > 0) {
-							} else {
-								scrollX = oldScrollX;
-							}
-
-						} else if (deltaX > 0 && oldScrollX >= 0) {// move to
-																	// left
-							if (scrollX < getMenuViewWidth()) {
-							} else {
-								scrollX = getMenuViewWidth();
-							}
+					} else if (deltaX > 0 && oldScrollX >= 0) {// move to
+																// left
+						if (scrollX < getMenuViewWidth()) {
+						} else {
+							scrollX = getMenuViewWidth();
 						}
-						scrollTo((int) scrollX, getScrollY());
 					}
+					scrollTo((int) scrollX, getScrollY());
 				}
 				break;
 			case MotionEvent.ACTION_CANCEL:
 				LOG.info("onTouchEvent:ACTION_CANCEL");
 			case MotionEvent.ACTION_UP:
-				LOG.info("onTouchEvent:ACTION_UP");
+				LOG.info("onTouchEvent:ACTION_UP & mIsBeingDragged:"
+						+ mIsBeingDragged);
 				if (mIsBeingDragged) {
 					final VelocityTracker velocityTracker = mVelocityTracker;
 					velocityTracker.computeCurrentVelocity(1000);
 					int velocityX = (int) velocityTracker.getXVelocity();
 					velocityX = 0;
-					Log.e("ad", "velocityX == " + velocityX);
 					int oldScrollX = getScrollX();
+					LOG.error("oldScrollX == " + oldScrollX);
+					int menuViewWidth = getMenuViewWidth();
 					int dx = 0;
 					if (oldScrollX < 0) {
-						if (oldScrollX < -getMenuViewWidth() / 2
-								|| velocityX > SNAP_VELOCITY) {
-							dx = -getMenuViewWidth() - oldScrollX;
-						} else if (oldScrollX >= -getMenuViewWidth() / 2
+						dx = -oldScrollX;
+					} else {
+						if (oldScrollX > menuViewWidth / 2
 								|| velocityX < -SNAP_VELOCITY) {
+							dx = menuViewWidth - oldScrollX;
+						} else if (oldScrollX <= menuViewWidth / 2
+								|| velocityX > SNAP_VELOCITY) {
 							dx = -oldScrollX;
 						}
 					}
-					// else {
-					// if (oldScrollX > getDetailViewWidth() / 2
-					// || velocityX < -SNAP_VELOCITY) {
-					// dx = getDetailViewWidth() - oldScrollX;
-					// } else if (oldScrollX <= getDetailViewWidth() / 2
-					// || velocityX > SNAP_VELOCITY) {
-					// dx = -oldScrollX;
-					// }
-					// }
 					smoothScrollTo(dx);
 					clearChildrenCache();
-
 				}
-
-				break;
-
+				return false;
 			}
 			if (mVelocityTracker != null) {
 				mVelocityTracker.recycle();
 				mVelocityTracker = null;
 			}
-
 			return true;
 		}
 

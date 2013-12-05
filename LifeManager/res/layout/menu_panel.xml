@@ -1,4 +1,5 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/menu_panel"
-    android:layout_width="@dimen/dimen_menu_width"
+    android:layout_width="@dimen/dimen_menu_layout_width"
+    android:clickable="true"
     android:layout_height="fill_parent" />

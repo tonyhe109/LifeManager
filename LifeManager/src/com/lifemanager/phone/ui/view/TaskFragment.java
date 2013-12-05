@@ -32,7 +32,7 @@ public class TaskFragment extends ListFragment {
 		// add click logic
 		_button_menu.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
-				((TaskPanelActivity) getActivity()).onMenuButtonClick();
+				((TaskPanelActivity) getActivity()).onMenuActionIconClick();
 			}
 		});
 

@@ -1,6 +1,9 @@
 <resources>
 
     <dimen name="dimen_title_heigth">55dip</dimen>
-    <dimen name="dimen_menu_width">120dip</dimen>
+    <dimen name="dimen_menu_layout_width">120dip</dimen>
+    <dimen name="dimen_menu_layout_button_heigth">55dip</dimen>
+    <dimen name="dimen_menu_layout_button_size">25dip</dimen>
+    <dimen name="dimen_menu_layout_text_size">12dip</dimen>
 
 </resources>

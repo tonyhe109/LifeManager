@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/menu_frame"
-    android:layout_width="@dimen/dimen_menu_width"
+    android:layout_width="@dimen/dimen_menu_layout_width"
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
     <LinearLayout
-        android:layout_width="@dimen/dimen_menu_width"
+        android:layout_width="@dimen/dimen_menu_layout_width"
         android:layout_height="@dimen/dimen_title_heigth"
+        android:clickable="false"
         android:gravity="center"
         android:orientation="vertical" >
 
@@ -15,7 +16,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:clickable="false"
             android:gravity="center"
             android:text=""
             android:textColor="#000"
@@ -23,36 +23,36 @@
     </LinearLayout>
 
     <TextView
-        android:layout_width="@dimen/dimen_menu_width"
+        android:layout_width="@dimen/dimen_menu_layout_width"
         android:layout_height="1dip"
         android:background="#333333"
         android:clickable="false" />
 
     <ScrollView
-        android:layout_width="@dimen/dimen_menu_width"
-        android:layout_height="fill_parent" >
-
-        <!-- android:background="@drawable/booklist_menu_bg_unit" -->
+        android:layout_width="@dimen/dimen_menu_layout_width"
+        android:layout_height="fill_parent"
+        android:clickable="true" >
 
         <LinearLayout
-            android:layout_width="@dimen/dimen_menu_width"
+            android:layout_width="@dimen/dimen_menu_layout_width"
             android:layout_height="wrap_content"
+            android:clickable="true"
             android:orientation="vertical"
             android:padding="5dip" >
 
             <LinearLayout
-                android:id="@+id/llr_energy_management"
+                android:id="@+id/button_today"
                 android:layout_width="match_parent"
-                android:layout_height="40dip"
-                android:clickable="true"
-                android:onClick="llronclick" >
+                android:layout_height="@dimen/dimen_menu_layout_button_heigth"
+                android:clickable="true" >
 
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="@dimen/dimen_menu_layout_button_size"
+                    android:layout_height="@dimen/dimen_menu_layout_button_size"
                     android:layout_gravity="center"
                     android:layout_weight="0.1"
                     android:gravity="center"
+                    android:scaleType="fitStart"
                     android:src="@drawable/icon_today_normal" />
 
                 <TextView
@@ -60,29 +60,30 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_weight="0.9"
-                    android:text="TodayTask"
-                    android:textColor="#000" />
+                    android:text="@string/button_text_today"
+                    android:textColor="#000"
+                    android:textSize="@dimen/dimen_menu_layout_text_size" />
             </LinearLayout>
 
             <TextView
-                android:layout_width="@dimen/dimen_menu_width"
+                android:layout_width="@dimen/dimen_menu_layout_width"
                 android:layout_height="1dip"
                 android:background="#333333"
                 android:clickable="false" />
 
             <LinearLayout
-                android:id="@+id/llr_hr_management"
+                android:id="@+id/button_weekly"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:clickable="true"
-                android:onClick="llronclick" >
+                android:layout_height="@dimen/dimen_menu_layout_button_heigth"
+                android:clickable="true" >
 
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="@dimen/dimen_menu_layout_button_size"
+                    android:layout_height="@dimen/dimen_menu_layout_button_size"
                     android:layout_gravity="center"
                     android:layout_weight="0.1"
                     android:gravity="center"
+                    android:scaleType="fitStart"
                     android:src="@drawable/icon_seven_days_normal" />
 
                 <TextView
@@ -90,29 +91,30 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_weight="0.9"
-                    android:text="WeeklyTask"
-                    android:textColor="#000" />
+                    android:text="@string/button_text_weekly"
+                    android:textColor="#000"
+                    android:textSize="@dimen/dimen_menu_layout_text_size" />
             </LinearLayout>
 
             <TextView
-                android:layout_width="@dimen/dimen_menu_width"
+                android:layout_width="@dimen/dimen_menu_layout_width"
                 android:layout_height="1dip"
                 android:background="#333333"
                 android:clickable="false" />
 
             <LinearLayout
-                android:id="@+id/llr_purchasing_management"
+                android:id="@+id/button_setting"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:clickable="true"
-                android:onClick="llronclick" >
+                android:layout_height="@dimen/dimen_menu_layout_button_heigth"
+                android:clickable="true" >
 
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="@dimen/dimen_menu_layout_button_size"
+                    android:layout_height="@dimen/dimen_menu_layout_button_size"
                     android:layout_gravity="center"
                     android:layout_weight="0.1"
                     android:gravity="center"
+                    android:scaleType="fitStart"
                     android:src="@drawable/icon_filter_manage" />
 
                 <TextView
@@ -120,12 +122,13 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_weight="0.9"
-                    android:text="Setting"
-                    android:textColor="#000" />
+                    android:text="@string/button_text_setting"
+                    android:textColor="#000"
+                    android:textSize="@dimen/dimen_menu_layout_text_size" />
             </LinearLayout>
 
             <TextView
-                android:layout_width="@dimen/dimen_menu_width"
+                android:layout_width="@dimen/dimen_menu_layout_width"
                 android:layout_height="1dip"
                 android:background="#333333"
                 android:clickable="false" />
