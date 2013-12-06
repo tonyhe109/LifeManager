@@ -18,8 +18,6 @@ public class MainPanel extends RelativeLayout {
 	//
 	private static SlidingTaskFrame _slidingView = null;
 	//
-	private static boolean _abs_move_feature_eneable = false;
-	//
 	private static View _menuView;
 	//
 	private final LayoutParams BEHIND_PARAMS = new LayoutParams(
@@ -42,6 +40,8 @@ public class MainPanel extends RelativeLayout {
 
 	public void setMenuView(View view) {
 		_menuView = view;
+		_menuView.setFocusable(true);
+		_menuView.setClickable(true);
 		BEHIND_PARAMS.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
 		addView(view, BEHIND_PARAMS);
 	}
@@ -51,6 +51,13 @@ public class MainPanel extends RelativeLayout {
 		_slidingView.setView(view);
 		addView(_slidingView, ABOVE_PARAMS);
 		_slidingView.invalidate();
+		//
+		_slidingView.setClickable(true);
+		_slidingView.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View v) {
+				LOG.debug("_slidingView#onClick::::" + v);
+			}
+		});
 	}
 
 	public void addTaskView(View taskView) {
@@ -73,7 +80,7 @@ public class MainPanel extends RelativeLayout {
 		_menuView.requestFocus();
 	}
 
-	private static class SlidingTaskFrame extends ViewGroup  {
+	private static class SlidingTaskFrame extends ViewGroup {
 
 		private FrameLayout mContainer;
 		private Scroller mScroller;
@@ -86,14 +93,6 @@ public class MainPanel extends RelativeLayout {
 		public SlidingTaskFrame(Context context) {
 			super(context);
 			init();
-			this.setOnClickListener(new View.OnClickListener() {
-				
-				@Override
-				public void onClick(View v) {
-					LOG.debug("onClick::::"+v);
-					LOG.debug(""+SlidingTaskFrame.this.getRight() + "X :" + SlidingTaskFrame.this.getLeft());
-				}
-			});
 		}
 
 		@Override
@@ -183,10 +182,9 @@ public class MainPanel extends RelativeLayout {
 
 			return false;
 		}
-		
+
 		@Override
 		public boolean onTouchEvent(MotionEvent ev) {
-			LOG.debug("####"+SlidingTaskFrame.this.getRight() + "X :" + SlidingTaskFrame.this.getLeft());
 			if (mVelocityTracker == null) {
 				mVelocityTracker = VelocityTracker.obtain();
 			}

@@ -1,21 +1,19 @@
 package com.lifemanager.phone.ui.view;
 
 import android.os.Bundle;
-import android.support.v4.app.ListFragment;
-import android.util.Log;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.lifemanager.R;
 import com.lifemanager.logging.Logger;
 import com.lifemanager.phone.ui.TaskPanelActivity;
 
-public class TaskFragment extends ListFragment {
+public class TaskFragment extends Fragment {
 	protected static final Logger LOG = Logger.getLogger("TaskFragment");
 	protected ImageView _button_switch_mode;
 	protected ImageView _button_menu;
@@ -29,25 +27,23 @@ public class TaskFragment extends ListFragment {
 				.findViewById(R.id.ic_switch_mode);
 		_button_menu = (ImageView) mView.findViewById(R.id.ic_menu);
 		_taskPanelTitle = (TextView) mView.findViewById(R.id.iv_title);
+
 		// add click logic
 		_button_menu.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
+				LOG.debug("TaskFragment#button_menu on click .................");
 				((TaskPanelActivity) getActivity()).onMenuActionIconClick();
 			}
 		});
 
 		_button_switch_mode.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
+				LOG.debug("TaskFragment#button_switch on click .................");
 				((TaskPanelActivity) getActivity()).onSwitchModeButtonClick();
 			}
 		});
-
+		
 		return mView;
 	}
 
-	@Override
-	public void onListItemClick(ListView l, View v, int position, long id) {
-		super.onListItemClick(l, v, position, id);
-		Log.d("----->", position + "");
-	}
 }

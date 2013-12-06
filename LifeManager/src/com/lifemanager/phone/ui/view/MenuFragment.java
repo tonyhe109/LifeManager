@@ -20,8 +20,8 @@ public class MenuFragment extends Fragment {
 		View button_today = menuView.findViewById(R.id.button_today);
 		View button_weekly = menuView.findViewById(R.id.button_weekly);
 		View button_setting = menuView.findViewById(R.id.button_setting);
-		menuView.setFocusable(true);
 		menuView.setClickable(true);
+		menuView.setFocusable(true);
 		menuView.setOnClickListener(buttonClickListener);
 		button_today.setClickable(true);
 		button_weekly.setClickable(true);

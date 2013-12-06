@@ -7,9 +7,9 @@ import android.view.View;
 import com.lifemanager.R;
 import com.lifemanager.logging.Logger;
 import com.lifemanager.phone.LifeManagerActivity;
+import com.lifemanager.phone.ui.view.MainPanel;
 import com.lifemanager.phone.ui.view.MenuFragment;
 import com.lifemanager.phone.ui.view.TaskFragment;
-import com.lifemanager.phone.ui.view.MainPanel;
 import com.lifemanager.phone.ui.view.TaskViewManager;
 
 public class TaskPanelActivity extends LifeManagerActivity {
@@ -28,6 +28,7 @@ public class TaskPanelActivity extends LifeManagerActivity {
 		_taskPanel.setMenuView(_menuView);
 		_taskPanel.setTaskView(_taskView);
 		MenuFragment _menuFragment = new MenuFragment();
+		//MenuListFragment _menuFragment = new MenuListFragment();
 		TaskFragment _taskFragment = TaskViewManager.getTaskViewManager()
 				.getDefaultTaskFragment();
 		ft = this.getSupportFragmentManager().beginTransaction();
@@ -60,9 +61,9 @@ public class TaskPanelActivity extends LifeManagerActivity {
 	public void onMenuActionIconClick() {
 		_taskPanel.onMenuActionIconClick();
 	}
-	
-	public void onSwitchModeButtonClick(){
-		
+
+	public void onSwitchModeButtonClick() {
+		// TODO
 	}
 
 }
