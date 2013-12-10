@@ -41,8 +41,9 @@ public class MenuFragment extends Fragment {
 
 		@Override
 		public void onClick(View v) {
-			System.out.println("=================================================");
+			//System.out.println("=================================================");
 			Log.e("MenuFragment", "ButtonOnCleckListener on view:" + v.getId());
+			//new Exception().printStackTrace();
 		}
 
 	}

@@ -4,11 +4,35 @@
          Declare custom theme attributes that allow changing which styles are
          used for button bars depending on the API level.
          ?android:attr/buttonBarStyle is new as of API 11 so this is
-         necessary to support previous API levels.
+         necessary to support previous API levels. 
     -->
-    <declare-styleable name="ButtonBarContainerTheme">
-        <attr name="buttonBarStyle" format="reference" />
-        <attr name="buttonBarButtonStyle" format="reference" />
+    <attr name="buttonBarButtonStyle" format="reference" />
+
+    <declare-styleable></declare-styleable>
+    <declare-styleable name="SlidingMenu">
+        <attr name="mode">
+            <enum name="left" value="0" />
+            <enum name="right" value="1" />
+        </attr>
+        <attr name="viewAbove" format="reference" />
+        <attr name="viewBehind" format="reference" />
+        <attr name="behindOffset" format="dimension" />
+        <attr name="behindWidth" format="dimension" />
+        <attr name="behindScrollScale" format="float" />
+        <attr name="touchModeAbove">
+            <enum name="margin" value="0" />
+            <enum name="fullscreen" value="1" />
+        </attr>
+        <attr name="touchModeBehind">
+            <enum name="margin" value="0" />
+            <enum name="fullscreen" value="1" />
+        </attr>
+        <attr name="shadowDrawable" format="reference" />
+        <attr name="shadowWidth" format="dimension" />
+        <attr name="fadeEnabled" format="boolean" />
+        <attr name="fadeDegree" format="float" />
+        <attr name="selectorEnabled" format="boolean" />
+        <attr name="selectorDrawable" format="reference" />
     </declare-styleable>
 
 </resources>

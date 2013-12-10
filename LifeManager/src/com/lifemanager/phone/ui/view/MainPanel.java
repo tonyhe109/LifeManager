@@ -2,6 +2,7 @@ package com.lifemanager.phone.ui.view;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.VelocityTracker;
 import android.view.View;
@@ -14,6 +15,8 @@ import android.widget.Scroller;
 import com.lifemanager.logging.Logger;
 
 public class MainPanel extends RelativeLayout {
+
+	//
 	protected static final Logger LOG = Logger.getLogger("MainPanel");
 	//
 	private static SlidingTaskFrame _slidingView = null;
@@ -40,10 +43,9 @@ public class MainPanel extends RelativeLayout {
 
 	public void setMenuView(View view) {
 		_menuView = view;
-		_menuView.setFocusable(true);
-		_menuView.setClickable(true);
 		BEHIND_PARAMS.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
-		addView(view, BEHIND_PARAMS);
+		addView(_menuView, BEHIND_PARAMS);
+		invalidate();
 	}
 
 	public void setTaskView(View view) {
@@ -52,12 +54,12 @@ public class MainPanel extends RelativeLayout {
 		addView(_slidingView, ABOVE_PARAMS);
 		_slidingView.invalidate();
 		//
-		_slidingView.setClickable(true);
-		_slidingView.setOnClickListener(new View.OnClickListener() {
-			public void onClick(View v) {
-				LOG.debug("_slidingView#onClick::::" + v);
-			}
-		});
+//		_slidingView.setClickable(true);
+//		_slidingView.setOnClickListener(new View.OnClickListener() {
+//			public void onClick(View v) {
+//				LOG.debug("_slidingView#onClick::::" + v);
+//			}
+//		});
 	}
 
 	public void addTaskView(View taskView) {
@@ -72,6 +74,12 @@ public class MainPanel extends RelativeLayout {
 	public void onMenuActionIconClick() {
 		LOG.debug("onMenuActionIconClick function called ... ");
 		switchMenuView();
+		// TODO
+		LOG.error("_menuView getVisibility:" + _menuView.getVisibility());
+		if (_menuView.getVisibility() != View.VISIBLE) {
+			LOG.error("_menuView setVisibility:" + View.VISIBLE);
+			_menuView.setVisibility(View.VISIBLE);
+		}
 	}
 
 	private void switchMenuView() {
@@ -109,6 +117,9 @@ public class MainPanel extends RelativeLayout {
 		}
 
 		private void init() {
+			setWillNotDraw(false);
+			setDescendantFocusability(FOCUS_AFTER_DESCENDANTS);
+			setFocusable(true);
 			mContainer = new FrameLayout(getContext());
 			mContainer.setBackgroundColor(0xff000000);
 			mScroller = new Scroller(getContext());
@@ -265,13 +276,17 @@ public class MainPanel extends RelativeLayout {
 					smoothScrollTo(dx);
 					clearChildrenCache();
 				}
+				LOG.error("_menuView  visable:"
+						+ ((_menuView.getVisibility() == View.INVISIBLE) ? "INVISIBLE"
+								: "VISIBLE"));
+				_menuView.setVisibility(View.VISIBLE);
 				return false;
 			}
 			if (mVelocityTracker != null) {
 				mVelocityTracker.recycle();
 				mVelocityTracker = null;
 			}
-			return true;
+			return false;
 		}
 
 		private int getMenuViewWidth() {
