@@ -1,4 +1,4 @@
-package com.lifemanager.ui.core;
+package com.lifemanager.core.ui;
 
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;

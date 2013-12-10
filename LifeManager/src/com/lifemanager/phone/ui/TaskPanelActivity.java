@@ -5,13 +5,13 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 
 import com.lifemanager.R;
+import com.lifemanager.core.ui.SlidingMenu;
 import com.lifemanager.logging.Logger;
 import com.lifemanager.phone.LifeManagerActivity;
 import com.lifemanager.phone.ui.view.MainPanel;
 import com.lifemanager.phone.ui.view.MenuFragment;
 import com.lifemanager.phone.ui.view.TaskFragment;
 import com.lifemanager.phone.ui.view.TaskViewManager;
-import com.lifemanager.ui.core.SlidingMenu;
 
 public class TaskPanelActivity extends LifeManagerActivity {
 	private static final Logger LOG = Logger
