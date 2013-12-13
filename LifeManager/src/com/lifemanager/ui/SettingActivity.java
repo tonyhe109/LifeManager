@@ -1,4 +1,4 @@
-package com.lifemanager.phone.ui;
+package com.lifemanager.ui;
 
 import android.support.v4.app.FragmentActivity;
 

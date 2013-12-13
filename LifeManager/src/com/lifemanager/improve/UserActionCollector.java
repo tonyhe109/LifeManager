@@ -1,6 +1,6 @@
 package com.lifemanager.improve;
 
-import com.lifemanager.phone.LifeManagerModule;
+import com.lifemanager.LifeManagerModule;
 
 public class UserActionCollector {
 	

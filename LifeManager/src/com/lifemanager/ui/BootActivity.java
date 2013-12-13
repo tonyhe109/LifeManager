@@ -1,4 +1,4 @@
-package com.lifemanager.phone;
+package com.lifemanager.ui;
 
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.ExecutionException;
@@ -13,7 +13,6 @@ import android.os.Bundle;
 
 import com.lifemanager.R;
 import com.lifemanager.logging.Logger;
-import com.lifemanager.phone.ui.TaskPanelActivity;
 
 public class BootActivity extends LifeManagerActivity {
 

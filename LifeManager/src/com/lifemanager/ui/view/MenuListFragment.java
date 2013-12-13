@@ -1,4 +1,4 @@
-package com.lifemanager.phone.ui.view;
+package com.lifemanager.ui.view;
 
 import android.content.Context;
 import android.os.Bundle;

@@ -1,4 +1,4 @@
-package com.lifemanager.phone;
+package com.lifemanager;
 
 public class LifeManagerModule {
 	private int _module_id = -1;

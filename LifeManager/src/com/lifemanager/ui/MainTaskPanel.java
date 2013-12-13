@@ -1,8 +1,7 @@
-package com.lifemanager.phone.ui.view;
+package com.lifemanager.ui;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.VelocityTracker;
 import android.view.View;
@@ -14,10 +13,11 @@ import android.widget.Scroller;
 
 import com.lifemanager.logging.Logger;
 
-public class MainPanel extends RelativeLayout {
+public class MainTaskPanel extends RelativeLayout {
 
+	public static final String TAG = "MainPanel";
 	//
-	protected static final Logger LOG = Logger.getLogger("MainPanel");
+	protected static final Logger LOG = Logger.getLogger(TAG);
 	//
 	private static SlidingTaskFrame _slidingView = null;
 	//
@@ -29,16 +29,21 @@ public class MainPanel extends RelativeLayout {
 	private final LayoutParams ABOVE_PARAMS = new LayoutParams(
 			LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
 
-	public MainPanel(Context context) {
-		super(context);
+	public MainTaskPanel(Context context) {
+		this(context, null);
+		LOG.debug("MainTaskPanel[O");
 	}
 
-	public MainPanel(Context context, AttributeSet attrs) {
+	public MainTaskPanel(Context context, AttributeSet attrs) {
 		super(context, attrs);
+		LOG.debug("MainTaskPanel[OO");
+		init(context);
 	}
 
-	public MainPanel(Context context, AttributeSet attrs, int defStyle) {
+	public MainTaskPanel(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
+		LOG.debug("MainTaskPanel[OOI");
+		init(context);
 	}
 
 	public void setMenuView(View view) {
@@ -48,23 +53,15 @@ public class MainPanel extends RelativeLayout {
 		invalidate();
 	}
 
+	private void init(Context context) {
+		_slidingView = new SlidingTaskFrame(context);
+	}
+
 	public void setTaskView(View view) {
-		_slidingView = new SlidingTaskFrame(getContext());
 		_slidingView.setView(view);
 		addView(_slidingView, ABOVE_PARAMS);
 		_slidingView.invalidate();
 		//
-//		_slidingView.setClickable(true);
-//		_slidingView.setOnClickListener(new View.OnClickListener() {
-//			public void onClick(View v) {
-//				LOG.debug("_slidingView#onClick::::" + v);
-//			}
-//		});
-	}
-
-	public void addTaskView(View taskView) {
-		_slidingView.setView(taskView);
-		_slidingView.invalidate();
 	}
 
 	public void showTaskView() {

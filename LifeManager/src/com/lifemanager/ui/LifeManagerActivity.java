@@ -1,10 +1,11 @@
-package com.lifemanager.phone;
+package com.lifemanager.ui;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.lifemanager.LifeManagerModule;
 import com.lifemanager.improve.UserActionCollector;
 
 public class LifeManagerActivity extends FragmentActivity{
