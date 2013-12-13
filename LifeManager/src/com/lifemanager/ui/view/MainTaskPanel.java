@@ -200,26 +200,10 @@ public class MainTaskPanel extends RelativeLayout {
 
 			final int action = ev.getAction();
 			final float x = ev.getX();
-			final float y = ev.getY();
 
 			switch (action) {
 			case MotionEvent.ACTION_DOWN:
 				Log.d(TAG, "onTouchEvent:ACTION_DOWN ");
-				// if (!mScroller.isFinished()) {
-				// mScroller.abortAnimation();
-				// }
-				// mLastMotionX = x;
-				// mLastMotionY = y;
-				// if (getScrollX() == -getMenuViewWidth()
-				// && mLastMotionX < getMenuViewWidth()) {
-				// return false;
-				// }
-
-				// if (getScrollX() == getDetailViewWidth()
-				// && mLastMotionX > getMenuViewWidth()) {
-				// return false;
-				// }
-
 				break;
 			case MotionEvent.ACTION_MOVE:
 				Log.d(TAG, "onTouchEvent:ACTION_MOVE & mIsBeingDragged:"
@@ -292,14 +276,6 @@ public class MainTaskPanel extends RelativeLayout {
 				return 0;
 			}
 			return _menuView.getWidth();
-		}
-
-		public void showMenuView() {
-			int menuWidth = getMenuViewWidth();
-			int oldScrollX = getScrollX();
-			if (oldScrollX == 0) {
-				smoothScrollTo(menuWidth);
-			}
 		}
 
 		public void hideMenuView() {
