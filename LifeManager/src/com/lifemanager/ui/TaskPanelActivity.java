@@ -6,12 +6,13 @@ import android.view.View;
 
 import com.lifemanager.R;
 import com.lifemanager.logging.Logger;
+import com.lifemanager.ui.view.MainTaskPanel;
 import com.lifemanager.ui.view.MenuFragment;
 import com.lifemanager.ui.view.TaskFragment;
 
-public class TaskPanelActivity extends LifeManagerActivity {
+public class TaskPanelActivity extends BaseActivity {
 	private static final Logger LOG = Logger
-			.getLogger(LifeManagerActivity.MAIN_TASK_PANEL.toString());
+			.getLogger(BaseActivity.MAIN_TASK_PANEL.toString());
 
 	private MainTaskPanel _TaskPanel;
 	private FragmentTransaction ft;
@@ -19,7 +20,7 @@ public class TaskPanelActivity extends LifeManagerActivity {
 	private TaskFragment _CurrentTaskFragment;
 
 	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState, LifeManagerActivity.MAIN_TASK_PANEL);
+		super.onCreate(savedInstanceState, BaseActivity.MAIN_TASK_PANEL);
 		setContentView(R.layout.main_panel);
 		_TaskPanel = (MainTaskPanel) findViewById(R.id.main_panel);
 		View _menuView = getLayoutInflater().inflate(R.layout.menu_panel, null);

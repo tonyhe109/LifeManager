@@ -8,7 +8,7 @@ import android.view.WindowManager;
 import com.lifemanager.LifeManagerModule;
 import com.lifemanager.improve.UserActionCollector;
 
-public class LifeManagerActivity extends FragmentActivity{
+public abstract class BaseActivity extends FragmentActivity{
 
 	public static final LifeManagerModule LOADING = new LifeManagerModule(0,"LOADING");
 	public static final LifeManagerModule MAIN_TASK_PANEL = new LifeManagerModule(1,"MAIN_TASK_PANEL");

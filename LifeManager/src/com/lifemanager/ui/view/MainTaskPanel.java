@@ -1,7 +1,8 @@
-package com.lifemanager.ui;
+package com.lifemanager.ui.view;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.VelocityTracker;
 import android.view.View;
@@ -11,17 +12,16 @@ import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 import android.widget.Scroller;
 
-import com.lifemanager.logging.Logger;
-
 public class MainTaskPanel extends RelativeLayout {
 
 	public static final String TAG = "MainPanel";
 	//
-	protected static final Logger LOG = Logger.getLogger(TAG);
 	//
-	private static SlidingTaskFrame _slidingView = null;
+	private static AboveSlidingView _slidingView = null;
 	//
 	private static View _menuView;
+	//
+	// private static Logger LOG = Logger.getLogger("MainPanel");
 	//
 	private final LayoutParams BEHIND_PARAMS = new LayoutParams(
 			LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT);
@@ -31,18 +31,18 @@ public class MainTaskPanel extends RelativeLayout {
 
 	public MainTaskPanel(Context context) {
 		this(context, null);
-		LOG.debug("MainTaskPanel[O");
+		Log.d(TAG, "MainTaskPanel[O");
 	}
 
 	public MainTaskPanel(Context context, AttributeSet attrs) {
 		super(context, attrs);
-		LOG.debug("MainTaskPanel[OO");
+		Log.d(TAG, "MainTaskPanel[OO");
 		init(context);
 	}
 
 	public MainTaskPanel(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
-		LOG.debug("MainTaskPanel[OOI");
+		Log.d(TAG, "MainTaskPanel[OOI");
 		init(context);
 	}
 
@@ -54,7 +54,7 @@ public class MainTaskPanel extends RelativeLayout {
 	}
 
 	private void init(Context context) {
-		_slidingView = new SlidingTaskFrame(context);
+		_slidingView = new AboveSlidingView(context);
 	}
 
 	public void setTaskView(View view) {
@@ -69,23 +69,23 @@ public class MainTaskPanel extends RelativeLayout {
 	}
 
 	public void onMenuActionIconClick() {
-		LOG.debug("onMenuActionIconClick function called ... ");
+		Log.d(TAG, "onMenuActionIconClick function called ... ");
 		switchMenuView();
 		// TODO
-		LOG.error("_menuView getVisibility:" + _menuView.getVisibility());
+		Log.d(TAG, "_menuView getVisibility:" + _menuView.getVisibility());
 		if (_menuView.getVisibility() != View.VISIBLE) {
-			LOG.error("_menuView setVisibility:" + View.VISIBLE);
+			Log.d(TAG, "_menuView setVisibility:" + View.VISIBLE);
 			_menuView.setVisibility(View.VISIBLE);
 		}
 	}
 
 	private void switchMenuView() {
 		_slidingView.switchMenuView();
-		LOG.debug("_menuView.request focus ");
+		Log.d(TAG, "_menuView.request focus ");
 		_menuView.requestFocus();
 	}
 
-	private static class SlidingTaskFrame extends ViewGroup {
+	private static class AboveSlidingView extends ViewGroup {
 
 		private FrameLayout mContainer;
 		private Scroller mScroller;
@@ -95,7 +95,7 @@ public class MainTaskPanel extends RelativeLayout {
 		private float mLastMotionY;
 		private static final int SNAP_VELOCITY = 1000;
 
-		public SlidingTaskFrame(Context context) {
+		public AboveSlidingView(Context context) {
 			super(context);
 			init();
 		}
@@ -204,7 +204,7 @@ public class MainTaskPanel extends RelativeLayout {
 
 			switch (action) {
 			case MotionEvent.ACTION_DOWN:
-				LOG.info("onTouchEvent:ACTION_DOWN ");
+				Log.d(TAG, "onTouchEvent:ACTION_DOWN ");
 				// if (!mScroller.isFinished()) {
 				// mScroller.abortAnimation();
 				// }
@@ -222,7 +222,7 @@ public class MainTaskPanel extends RelativeLayout {
 
 				break;
 			case MotionEvent.ACTION_MOVE:
-				LOG.info("onTouchEvent:ACTION_MOVE & mIsBeingDragged:"
+				Log.d(TAG, "onTouchEvent:ACTION_MOVE & mIsBeingDragged:"
 						+ mIsBeingDragged);
 				if (mIsBeingDragged) {
 					enableChildrenCache();
@@ -246,9 +246,9 @@ public class MainTaskPanel extends RelativeLayout {
 				}
 				break;
 			case MotionEvent.ACTION_CANCEL:
-				LOG.info("onTouchEvent:ACTION_CANCEL");
+				Log.d(TAG, "onTouchEvent:ACTION_CANCEL");
 			case MotionEvent.ACTION_UP:
-				LOG.info("onTouchEvent:ACTION_UP & mIsBeingDragged:"
+				Log.d(TAG, "onTouchEvent:ACTION_UP & mIsBeingDragged:"
 						+ mIsBeingDragged);
 				if (mIsBeingDragged) {
 					final VelocityTracker velocityTracker = mVelocityTracker;
@@ -256,7 +256,7 @@ public class MainTaskPanel extends RelativeLayout {
 					int velocityX = (int) velocityTracker.getXVelocity();
 					velocityX = 0;
 					int oldScrollX = getScrollX();
-					LOG.error("oldScrollX == " + oldScrollX);
+					Log.d(TAG, "oldScrollX == " + oldScrollX);
 					int menuViewWidth = getMenuViewWidth();
 					int dx = 0;
 					if (oldScrollX < 0) {
@@ -273,9 +273,10 @@ public class MainTaskPanel extends RelativeLayout {
 					smoothScrollTo(dx);
 					clearChildrenCache();
 				}
-				LOG.error("_menuView  visable:"
-						+ ((_menuView.getVisibility() == View.INVISIBLE) ? "INVISIBLE"
-								: "VISIBLE"));
+				Log.d(TAG,
+						"_menuView  visable:"
+								+ ((_menuView.getVisibility() == View.INVISIBLE) ? "INVISIBLE"
+										: "VISIBLE"));
 				_menuView.setVisibility(View.VISIBLE);
 				return false;
 			}

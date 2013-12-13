@@ -14,7 +14,7 @@ import android.os.Bundle;
 import com.lifemanager.R;
 import com.lifemanager.logging.Logger;
 
-public class BootActivity extends LifeManagerActivity {
+public class BootActivity extends BaseActivity {
 
 	private static final int MIN_SHOW_TIME = 1500;
 	private static final int MAX_SHOW_TIME = 10000;
@@ -29,7 +29,7 @@ public class BootActivity extends LifeManagerActivity {
 	@Override
 	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState, LifeManagerActivity.LOADING);
+		super.onCreate(savedInstanceState, BaseActivity.LOADING);
 
 		if (isNormalStartup()) {
 			LOG.debug("onCreate.");
