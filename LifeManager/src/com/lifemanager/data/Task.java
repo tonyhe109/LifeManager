@@ -1,23 +1,48 @@
+
 package com.lifemanager.data;
 
 import java.util.Date;
 
 public interface Task extends TaskPriority {
 
-	public String getTitle();
+    /**
+     * it's task's unique id
+     * 
+     * @return long value of the task create time
+     */
+    public long getUnique();
 
-	public int getPriority();
+    /**
+     * Task tile , should not be null
+     * 
+     * @return
+     */
+    public String getTitle();
 
-	public String getContent();
+    /**
+     * task priority
+     * 
+     * @see TaskPriority
+     * @return
+     */
+    public int getPriority();
 
-	public Date getStartTime();
+    /**
+     * task Content
+     * 
+     * @see TaskPriority
+     * @return
+     */
+    public String getContent();
 
-	public Date getEndTime();
+    public Date getStartTime();
 
-	public int getDerution();
+    public Date getEndTime();
 
-	public Object getComments();
+    public long getDuration();
 
-	public Date getAlarmTime();
+    public Object getComments();
+
+    public Date getAlarmTime();
 
 }

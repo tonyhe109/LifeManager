@@ -1,14 +1,15 @@
+
 package com.lifemanager.data;
 
 public interface Group extends TaskPriority {
 
-	//
-	public int getCount();
+    //
+    public int getCount();
 
-	//
-	public String getText();
+    //
+    public String getText();
 
-	//
-	public int getIconImageRes();
-	
+    //
+    public int getIconImageRes();
+
 }
