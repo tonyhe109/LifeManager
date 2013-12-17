@@ -12,12 +12,7 @@ public class TaskView {
 	
 	
 	
-	
-	private class OneDayTaskList extends ArrayList{
-		
-	}
-	
-	
+
 	private class OneDayAdapter extends BaseAdapter{
 
 		@Override

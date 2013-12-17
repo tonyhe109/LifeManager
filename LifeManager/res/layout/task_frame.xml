@@ -24,31 +24,32 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:gravity="center_horizontal"
-            android:textColor="#000"
             android:layout_weight="0.8"
+            android:gravity="center_horizontal"
             android:text=""
+            android:textColor="#000"
             android:textSize="17dp" />
 
         <ImageView
             android:id="@+id/ic_menu"
-             android:clickable="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical|right"
             android:layout_weight="0.1"
+            android:clickable="true"
             android:src="@drawable/ic_action_notes" />
     </LinearLayout>
-      <TextView
-               android:layout_width="fill_parent"
-               android:clickable="false"
-               android:layout_height="1dip"
-               android:background="#333333" />
-    <ListView
-        android:id="@android:id/list"
-        android:layout_height="fill_parent"
+
+    <TextView
         android:layout_width="fill_parent"
-       >
+        android:layout_height="1dip"
+        android:background="#333333"
+        android:clickable="false" />
+
+    <ListView
+        android:id="@+id/list"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
     </ListView>
 
 </LinearLayout>

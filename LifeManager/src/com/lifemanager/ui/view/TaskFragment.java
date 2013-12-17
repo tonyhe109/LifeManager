@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.lifemanager.R;
@@ -25,6 +26,7 @@ public abstract class TaskFragment extends Fragment {
 	protected ImageView _button_switch_mode;
 	protected ImageView _button_menu;
 	protected TextView _taskPanelTitle;
+	protected ListView _taskListView;
 	protected int _TaskFragmentID = -1;
 
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -35,6 +37,8 @@ public abstract class TaskFragment extends Fragment {
 				.findViewById(R.id.ic_switch_mode);
 		_button_menu = (ImageView) mView.findViewById(R.id.ic_menu);
 		_taskPanelTitle = (TextView) mView.findViewById(R.id.iv_title);
+		
+		_taskListView = (ListView) mView.findViewById(R.id.list);
 
 		// add click logic
 		_button_menu.setOnClickListener(new OnClickListener() {

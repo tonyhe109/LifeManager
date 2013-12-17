@@ -3,7 +3,7 @@ package com.lifemanager.data;
 
 import java.util.Date;
 
-public class LmTask implements Task {
+public class LiMaTask implements Task {
 
     private final long _UniqueID;
     protected String _Title = "";
@@ -13,6 +13,8 @@ public class LmTask implements Task {
     protected Date _EndTime;
     protected int _Duration;
 
+    private int _State = 0;
+
     /**
      * LmTask priority base constructor, Task will construct by priority ,<br>
      * <b>Start Time</b> set by perfernce default delay time .<br>
@@ -20,7 +22,7 @@ public class LmTask implements Task {
      * 
      * @param priority
      */
-    public LmTask(int priority) {
+    public LiMaTask(int priority) {
         _UniqueID = System.currentTimeMillis();
         _Priority = priority;
         // set start time
@@ -38,7 +40,7 @@ public class LmTask implements Task {
      * 
      * @param start
      */
-    public LmTask(Date start) {
+    public LiMaTask(Date start) {
         _UniqueID = System.currentTimeMillis();
         _Priority = UserPerfernce.getDefaultTaskPriority();
         // set start time
@@ -55,7 +57,7 @@ public class LmTask implements Task {
      * @param priority
      * @param start
      */
-    public LmTask(int priority, Date start) {
+    public LiMaTask(int priority, Date start) {
         _UniqueID = System.currentTimeMillis();
         _Priority = priority;
         // set start time
@@ -162,6 +164,18 @@ public class LmTask implements Task {
             default:
                 break;
         }
+    }
+
+    @Override
+    public int getTaskState() {
+        return _State;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+
+        return (o instanceof Task) && ((Task) o).getUnique() == getUnique();
+
     }
 
 }

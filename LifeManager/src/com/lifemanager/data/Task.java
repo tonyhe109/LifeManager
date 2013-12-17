@@ -3,7 +3,7 @@ package com.lifemanager.data;
 
 import java.util.Date;
 
-public interface Task extends TaskPriority {
+public interface Task extends TaskPriority, TaskTiming {
 
     /**
      * it's task's unique id
@@ -35,14 +35,34 @@ public interface Task extends TaskPriority {
      */
     public String getContent();
 
+    /**
+     * @return
+     */
     public Date getStartTime();
 
+    /**
+     * @return
+     */
     public Date getEndTime();
 
+    /**
+     * @return
+     */
     public long getDuration();
 
+    /**
+     * @return
+     */
     public Object getComments();
 
+    /**
+     * @return
+     */
     public Date getAlarmTime();
+
+    /**
+     * @return
+     */
+    public int getTaskState();
 
 }
