@@ -5,7 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class WeeklyTaskFragment extends TaskFragment {
+public class WeeklyTaskFragment extends AbsTaskFragment {
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -24,6 +24,6 @@ public class WeeklyTaskFragment extends TaskFragment {
 
 	@Override
 	public int getTaskFragmentID() {
-		return TaskFragment.WEEKLY_TASK_VIEW;
+		return AbsTaskFragment.WEEKLY_TASK_VIEW;
 	}
 }

@@ -1,5 +1,5 @@
 
-package com.lifemanager.ui.data;
+package com.lifemanager.data.ui;
 
 import com.lifemanager.data.Task;
 import com.lifemanager.data.TaskGroup;

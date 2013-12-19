@@ -51,10 +51,10 @@ public class MenuFragment extends Fragment {
 		public void onClick(View v) {
 			switch (v.getId()) {
 			case R.id.button_today:
-				contorler.switchTaskView(TaskFragment.SINGLE_DAY_TASK_VIEW);
+				contorler.switchTaskView(AbsTaskFragment.SINGLE_DAY_TASK_VIEW);
 				break;
 			case R.id.button_weekly:
-				contorler.switchTaskView(TaskFragment.WEEKLY_TASK_VIEW);
+				contorler.switchTaskView(AbsTaskFragment.WEEKLY_TASK_VIEW);
 				break;
 			case R.id.button_setting:
 				Log.e("MenuFragment", "not implemention exception");

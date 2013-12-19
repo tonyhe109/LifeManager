@@ -1,5 +1,5 @@
 
-package com.lifemanager.ui.data;
+package com.lifemanager.data.ui;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -15,13 +15,13 @@ import com.lifemanager.data.TaskPriority;
 import com.lifemanager.data.TaskTiming;
 import com.lifemanager.data.TimingGroup;
 
-public class SDayTaskArrayAdapter extends TaskArrayAdapter {
+public class SingleDayAdapter extends TaskArrayAdapter {
 
     private TaskGroup[] pGroup;
     private TaskGroup[] tGroup;
     private View _NoItemView;
 
-    public SDayTaskArrayAdapter(Context context, TaskList tList) {
+    public SingleDayAdapter(Context context, TaskList tList) {
         super(context, tList);
         initGroup();
     }
@@ -56,7 +56,6 @@ public class SDayTaskArrayAdapter extends TaskArrayAdapter {
                 if (size > 0) {
 
                 }
-
                 break;
             case ORDER_TIME:
 
@@ -68,13 +67,14 @@ public class SDayTaskArrayAdapter extends TaskArrayAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        //if (size() == 0) {
-            _NoItemView = LayoutInflater.from(parent.getContext()).inflate(
-                    R.layout.task_panel_no_item,null);
-            convertView = _NoItemView;
-            return convertView;
-        //}
+        
+        
+        _NoItemView = LayoutInflater.from(parent.getContext()).inflate(
+                R.layout.task_panel_no_item, null);
+        convertView = _NoItemView;
+        
+        
+        return convertView;
 
-        //return null;
     }
 }

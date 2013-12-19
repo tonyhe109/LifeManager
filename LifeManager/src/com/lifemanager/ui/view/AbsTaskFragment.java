@@ -13,8 +13,9 @@ import android.widget.TextView;
 import com.lifemanager.R;
 import com.lifemanager.logging.Logger;
 import com.lifemanager.ui.TaskPanelActivity;
+import com.lifemanager.ui.view.singleday.SingleDayTaskFragment;
 
-public abstract class TaskFragment extends Fragment {
+public abstract class AbsTaskFragment extends Fragment {
 
 	public static final String TAG = "Task Fragment";
 	public static final int DEFAULT_TASK_VIEW = 0;
@@ -70,33 +71,33 @@ public abstract class TaskFragment extends Fragment {
 	}
 
 	private static final TaskFragmentManager _TaskFragmentManager = new TaskFragmentManager();
-	private static TaskFragment _SingalDayTaskFragment;
-	private static TaskFragment _WeeklyTaskFragment;
+	private static AbsTaskFragment _SingalDayTaskFragment;
+	private static AbsTaskFragment _WeeklyTaskFragment;
 	private static int _CurrentTaskFragmentViewID = -1;
 
 	public static class TaskFragmentManager {
 
 		private TaskFragmentManager() {
-			_SingalDayTaskFragment = new SingalDayTaskFragment();
+			_SingalDayTaskFragment = new SingleDayTaskFragment();
 			_WeeklyTaskFragment = new WeeklyTaskFragment();
 		}
 
-		private TaskFragment getDefaultTaskFragment() {
+		private AbsTaskFragment getDefaultTaskFragment() {
 
 			return getSingleDayTaskFragment();
 		}
 
-		private TaskFragment getSingleDayTaskFragment() {
+		private AbsTaskFragment getSingleDayTaskFragment() {
 			_CurrentTaskFragmentViewID = SINGLE_DAY_TASK_VIEW;
 			return _SingalDayTaskFragment;
 		}
 
-		private TaskFragment getWeeklyTaskFragment() {
+		private AbsTaskFragment getWeeklyTaskFragment() {
 			_CurrentTaskFragmentViewID = WEEKLY_TASK_VIEW;
 			return _WeeklyTaskFragment;
 		}
 
-		public TaskFragment getTaskFragmentByID(int id) {
+		public AbsTaskFragment getTaskFragmentByID(int id) {
 
 			switch (id) {
 			case DEFAULT_TASK_VIEW:

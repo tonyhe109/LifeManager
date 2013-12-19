@@ -8,7 +8,7 @@ import com.lifemanager.R;
 import com.lifemanager.logging.Logger;
 import com.lifemanager.ui.view.MainTaskPanel;
 import com.lifemanager.ui.view.MenuFragment;
-import com.lifemanager.ui.view.TaskFragment;
+import com.lifemanager.ui.view.AbsTaskFragment;
 
 public class TaskPanelActivity extends BaseActivity {
 	private static final Logger LOG = Logger
@@ -17,7 +17,7 @@ public class TaskPanelActivity extends BaseActivity {
 	private MainTaskPanel _TaskPanel;
 	private FragmentTransaction ft;
 	private MenuFragment _MenuFragment;
-	private TaskFragment _CurrentTaskFragment;
+	private AbsTaskFragment _CurrentTaskFragment;
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState, BaseActivity.MAIN_TASK_PANEL);
@@ -29,8 +29,8 @@ public class TaskPanelActivity extends BaseActivity {
 		_TaskPanel.setTaskView(_taskView);
 		_MenuFragment = new MenuFragment();
 		// MenuListFragment _menuFragment = new MenuListFragment();
-		_CurrentTaskFragment = TaskFragment.getManager().getTaskFragmentByID(
-				TaskFragment.DEFAULT_TASK_VIEW);
+		_CurrentTaskFragment = AbsTaskFragment.getManager().getTaskFragmentByID(
+				AbsTaskFragment.DEFAULT_TASK_VIEW);
 		ft = this.getSupportFragmentManager().beginTransaction();
 		ft.replace(R.id.menu_panel, _MenuFragment);
 		ft.replace(R.id.task_panel, _CurrentTaskFragment);
@@ -92,8 +92,8 @@ public class TaskPanelActivity extends BaseActivity {
 		// hide menu view.
 		_TaskPanel.onMenuActionIconClick();
 		// replace the old taskView
-		if (!TaskFragment.getManager().isCurrentShowTaskView(taskFragmentID)) {
-			TaskFragment _taskFragment = TaskFragment.getManager()
+		if (!AbsTaskFragment.getManager().isCurrentShowTaskView(taskFragmentID)) {
+			AbsTaskFragment _taskFragment = AbsTaskFragment.getManager()
 					.getTaskFragmentByID(taskFragmentID);
 			ft = this.getSupportFragmentManager().beginTransaction();
 			ft.replace(R.id.task_panel, _taskFragment);

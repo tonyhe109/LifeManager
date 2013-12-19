@@ -1,5 +1,5 @@
 
-package com.lifemanager.ui.data;
+package com.lifemanager.data.ui;
 
 import java.util.ArrayList;
 import java.util.List;
