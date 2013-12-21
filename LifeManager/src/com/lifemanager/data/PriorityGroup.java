@@ -11,10 +11,20 @@ public class PriorityGroup extends AbsTaskGroup {
             throw new IllegalStateException("Task illegal priority value");
         }
         _Priority = priority;
+        switch (priority) {
+            case PRIORITY_HIGH:
+                _Text = "优先级 高";
+                break;
+            case PRIORITY_MIDDLE:
+                _Text = "优先级 中";
+                break;
+            case PRIORITY_LOW:
+                _Text = "优先级 低";
+                break;
+        }
     }
 
     public int getPriority() {
-
         return _Priority;
     }
 

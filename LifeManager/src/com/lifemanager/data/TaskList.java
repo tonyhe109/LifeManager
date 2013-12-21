@@ -14,12 +14,39 @@ public class TaskList extends ArrayList<Task> implements TaskOrderMode {
 
     private int _Order = -1;
 
+    public TaskList() {
+        this(-1);
+    }
+
     public TaskList(int order) {
-        _Order = order;
+        if (order != ORDER_TIME)
+            _Order = ORDER_TIME;
+        else
+            _Order = ORDER_PRIORITY;
     }
 
     public void sort(Comparator<Task> comp) {
         Collections.sort(this, comp);
+    }
+
+    public void addArray(Task[] array) {
+        int length = array.length;
+        for (int i = 0; i < length; i++) {
+            add(array[i]);
+        }
+        invalidate();
+    }
+
+    protected void invalidate() {
+        System.out.println("Task List invalidate ... ");
+        switch (_Order) {
+            case ORDER_PRIORITY:
+                Collections.sort(this, COMP_PRIORITY);
+                break;
+            case ORDER_TIME:
+                Collections.sort(this, COMP_TIME);
+                break;
+        }
     }
 
     public void sort(int sort) {
@@ -29,7 +56,6 @@ public class TaskList extends ArrayList<Task> implements TaskOrderMode {
         switch (sort) {
             case ORDER_PRIORITY:
                 Collections.sort(this, COMP_PRIORITY);
-
                 break;
             case ORDER_TIME:
                 Collections.sort(this, COMP_TIME);
@@ -41,13 +67,12 @@ public class TaskList extends ArrayList<Task> implements TaskOrderMode {
     private static class PriorityTimeComparator implements Comparator<Task> {
         @Override
         public int compare(Task lhs, Task rhs) {
-            long result = lhs.getPriority() - lhs.getPriority();
-            if (result == 0) {
-                result = lhs.getStartTime().getTime() - rhs.getStartTime().getTime();
-                return result > 0 ? 1 : -1;
-            } else {
-                return (int) result;
+            long priority = lhs.getPriority() - rhs.getPriority();
+            if (priority == 0) {
+                priority = lhs.getStartTime().getTime() - rhs.getStartTime().getTime();
+                return priority > 0 ? 1 : -1;
             }
+            return (int) priority;
         }
     }
 
@@ -58,11 +83,5 @@ public class TaskList extends ArrayList<Task> implements TaskOrderMode {
             return result > 0 ? 1 : -1;
         }
     }
-
-    // abstract class TaskListDataChangeListener {
-    //
-    // public abstract void taskDataChange();
-    //
-    // }
 
 }

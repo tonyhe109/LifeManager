@@ -18,17 +18,18 @@ import com.lifemanager.exception.NotImplementException;
  * @author tony.he
  * @param <TaskViewItem>
  */
-public abstract class TaskArrayAdapter<TaskViewItem> extends BaseAdapter implements TaskOrderMode {
+public abstract class TaskArrayAdapter extends BaseAdapter implements TaskOrderMode {
 
     protected TaskList _TaskList = null;
     protected int _Order = ORDER_PRIORITY;
     protected int _Mode = MODE_SIMPLE;
-    protected List<TaskViewItem> _AllTaskItems;
+    protected List _AllTaskItems;
     protected Object _Lock = new Object();
     protected Context _Context;
 
-    protected ArrayList<TaskViewItem> _OriginalItems;
-    // TODO add task fillter , as the task have many status ...
+    protected ArrayList _OriginalItems;
+
+    // TODO add task filter , as the task have many status ...
 
     /**
      * Indicates whether or not {@link #notifyDataSetChanged()} must be called
@@ -39,6 +40,7 @@ public abstract class TaskArrayAdapter<TaskViewItem> extends BaseAdapter impleme
     public TaskArrayAdapter(Context context, TaskList tList) {
         _Context = context;
         _TaskList = tList;
+        _AllTaskItems = new ArrayList();
         init();
         invalidate();
     }
@@ -47,13 +49,12 @@ public abstract class TaskArrayAdapter<TaskViewItem> extends BaseAdapter impleme
         _Context = context;
         _Order = order;
         _TaskList = tList;
+        _AllTaskItems = new ArrayList();
         init();
         invalidate();
     }
 
-    private void init() {
-        _AllTaskItems = new ArrayList<TaskViewItem>();
-    }
+    protected abstract void init() ;
 
     public void setTaskList(TaskList tList) {
         _TaskList = tList;
@@ -130,8 +131,8 @@ public abstract class TaskArrayAdapter<TaskViewItem> extends BaseAdapter impleme
             int index = -1;
             int size = _AllTaskItems.size();
             for (int i = 0; i < size; i++) {
-                TaskViewItem item = _AllTaskItems.get(i);
-                if (item instanceof TaskItem && ((TaskItem) item).getData().equals(task)) {
+                Object item = _AllTaskItems.get(i);
+                if (item instanceof Task && item.equals(task)) {
                     index = i;
                     break;
                 }
@@ -140,7 +141,7 @@ public abstract class TaskArrayAdapter<TaskViewItem> extends BaseAdapter impleme
         }
     }
 
-    protected int indexOf(TaskViewItem item) {
+    protected int indexOf(Object item) {
         int index = -1;
         new NotImplementException().printStackTrace();
         return index;
@@ -176,7 +177,7 @@ public abstract class TaskArrayAdapter<TaskViewItem> extends BaseAdapter impleme
     }
 
     @Override
-    public TaskViewItem getItem(int position) {
+    public Object getItem(int position) {
         return _AllTaskItems.get(position);
     }
 

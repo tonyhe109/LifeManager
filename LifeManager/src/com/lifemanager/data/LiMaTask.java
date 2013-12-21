@@ -67,6 +67,18 @@ public class LiMaTask implements Task {
         _EndTime = new Date(_StartTime.getTime() + duration);
     }
 
+    /**
+     * LmTask constructor<br>
+     * <b>End Time</b> set by default duration & start time .
+     * 
+     * @param priority
+     * @param start
+     */
+    public LiMaTask(int priority, Date start, String title) {
+        this(priority, start);
+        _Title = title;
+    }
+
     @Override
     public final long getUnique() {
         return _UniqueID;
@@ -173,9 +185,17 @@ public class LiMaTask implements Task {
 
     @Override
     public boolean equals(Object o) {
-
         return (o instanceof Task) && ((Task) o).getUnique() == getUnique();
-
     }
 
+    @Override
+    public String toString() {
+        StringBuffer sb = new StringBuffer();
+        sb.append("Task[" + _UniqueID + "] Priority:" + _Priority + " start:" + _StartTime + " duration:" + getDuration());
+        if (_Title != null && !_Title.equals("")) {
+            sb.append(" Title:" + _Title);
+        }
+        return sb.toString();
+
+    }
 }

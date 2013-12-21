@@ -17,8 +17,7 @@ public abstract class AbsTaskGroup implements TaskGroup {
 
     public void buildGroup(int first, int end) {
         _FirstTaskIndex = first;
-        _Count = (end - first) > 0 ? end - first + 1 : 0;
-        new NotImplementException().printStackTrace();
+        _Count = (end - first) > 0 ? end - first +1 : 0;
     }
 
     @Override
@@ -38,13 +37,11 @@ public abstract class AbsTaskGroup implements TaskGroup {
 
     @Override
     public String getText() {
-
         return _Text;
     }
 
     @Override
     public int getIconImageRes() {
-
         return _IconImageRes;
     }
 

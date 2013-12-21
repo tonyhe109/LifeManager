@@ -6,8 +6,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.lifemanager.R;
+import com.lifemanager.data.Task;
+import com.lifemanager.data.TaskDataHelper;
 import com.lifemanager.data.TaskList;
+import com.lifemanager.data.TaskPriority;
 import com.lifemanager.data.ui.SingleDayAdapter;
 import com.lifemanager.ui.view.AbsTaskFragment;
 
@@ -26,7 +32,9 @@ public class SingleDayTaskFragment extends AbsTaskFragment {
         LOG.debug("SingalDayTaskFragment.onActivityCreated");
         _taskPanelTitle.setText("Singal Day Tasks");
         LOG.debug("TaskFragment.onActivityCreated");
-        BaseAdapter adapter = new SingleDayAdapter(getActivity(), new TaskList(0));
+        TaskList tList = new TaskList();
+        tList.addArray(TaskDataHelper.getTestTaskArray());
+        BaseAdapter adapter = new SingleDayAdapter(getActivity(), tList);
         _taskListView.setAdapter(adapter);
     }
 
@@ -34,4 +42,5 @@ public class SingleDayTaskFragment extends AbsTaskFragment {
     public int getTaskFragmentID() {
         return AbsTaskFragment.SINGLE_DAY_TASK_VIEW;
     }
+
 }
