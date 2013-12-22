@@ -1,0 +1,9 @@
+<resources>
+
+    <dimen name="font_size_1">55dip</dimen>
+    <dimen name="font_size_2">120dip</dimen>
+    <dimen name="font_size_3">55dip</dimen>
+    <dimen name="font_size_4">25dip</dimen>
+    <dimen name="font_size_5">12dip</dimen>
+
+</resources>

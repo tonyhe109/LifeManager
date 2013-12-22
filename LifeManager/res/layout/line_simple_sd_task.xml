@@ -27,10 +27,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dip"
-        android:layout_marginRight="15dip"
+        android:layout_marginRight="30dip"
         android:layout_marginTop="10dip"
         android:background="@drawable/record_item_bg_r2"
-        android:text="诚信是微信失控商业化模式的保证书"
+        android:text=""
         android:textColor="#000"
         android:textSize="15sp"
         android:textStyle="bold" />

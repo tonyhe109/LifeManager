@@ -10,9 +10,8 @@
         android:layout_gravity="center"
         android:layout_marginLeft="23dip"
         android:gravity="center"
-        android:text="0"
-        android:textSize="12sp" 
         android:background="@drawable/timedot_day"
+        android:textSize="12sp" 
         />
 
     <TextView
