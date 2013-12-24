@@ -1,3 +1,4 @@
+
 package com.lifemanager.ui.view;
 
 import android.os.Bundle;
@@ -17,110 +18,93 @@ import com.lifemanager.ui.view.singleday.SingleDayTaskFragment;
 
 public abstract class AbsTaskFragment extends Fragment {
 
-	public static final String TAG = "Task Fragment";
-	public static final int DEFAULT_TASK_VIEW = 0;
-	public static final int SINGLE_DAY_TASK_VIEW = 1;
-	public static final int WEEKLY_TASK_VIEW = 2;
+    public static final String TAG = "Task Fragment";
+    public static final int DEFAULT_TASK_VIEW = 0;
+    public static final int SINGLE_DAY_TASK_VIEW = 1;
+    public static final int WEEKLY_TASK_VIEW = 2;
 
-	protected static final Logger LOG = Logger.getLogger(TAG);
+    protected static final Logger LOG = Logger.getLogger(TAG);
 
-	protected ImageView _button_switch_mode;
-	protected ImageView _button_menu;
-	protected TextView _taskPanelTitle;
-	protected ListView _taskListView;
-	protected int _TaskFragmentID = -1;
+    protected ImageView _button_switch_mode;
+    protected ImageView _button_menu;
+    protected TextView _taskPanelTitle;
+    protected ListView _taskListView;
+    protected int _TaskFragmentID = -1;
 
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-		LOG.debug("TaskFragment.onCreateView");
-		View mView = inflater.inflate(R.layout.task_frame, null);
-		_button_switch_mode = (ImageView) mView
-				.findViewById(R.id.ic_switch_mode);
-		_button_menu = (ImageView) mView.findViewById(R.id.ic_menu);
-		_taskPanelTitle = (TextView) mView.findViewById(R.id.iv_title);
-		
-		_taskListView = (ListView) mView.findViewById(R.id.list);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+            Bundle savedInstanceState) {
+        LOG.debug("TaskFragment.onCreateView");
+        View mView = inflater.inflate(R.layout.task_frame, null);
+        _button_switch_mode = (ImageView) mView
+                .findViewById(R.id.ic_switch_mode);
+        _button_menu = (ImageView) mView.findViewById(R.id.ic_menu);
+        _taskPanelTitle = (TextView) mView.findViewById(R.id.iv_title);
+        _taskListView = (ListView) mView.findViewById(R.id.list);
+        return mView;
+    }
 
-		// add click logic
-		_button_menu.setOnClickListener(new OnClickListener() {
-			public void onClick(View v) {
-				LOG.debug("TaskFragment#button_menu on click .................");
-				((TaskPanelActivity) getActivity()).onMenuActionIconClick();
-			}
-		});
+    public void onActivityCreated(Bundle savedInstanceState) {
+        _TaskFragmentID = getTaskFragmentID();
+        super.onActivityCreated(savedInstanceState);
+    }
 
-		_button_switch_mode.setOnClickListener(new OnClickListener() {
-			public void onClick(View v) {
-				LOG.debug("TaskFragment#button_switch on click .................");
-				((TaskPanelActivity) getActivity()).onSwitchModeButtonClick();
-			}
-		});
+    public abstract int getTaskFragmentID();
+    
+    public static TaskFragmentManager getManager() {
+        return _TaskFragmentManager;
+    }
 
-		return mView;
-	}
+    private static final TaskFragmentManager _TaskFragmentManager = new TaskFragmentManager();
+    private static AbsTaskFragment _SingalDayTaskFragment;
+    private static AbsTaskFragment _WeeklyTaskFragment;
+    private static int _CurrentTaskFragmentViewID = -1;
 
-	public void onActivityCreated(Bundle savedInstanceState) {
-		_TaskFragmentID = getTaskFragmentID();
-		super.onActivityCreated(savedInstanceState);
-	}
+    public static class TaskFragmentManager {
 
-	public abstract int getTaskFragmentID();
+        private TaskFragmentManager() {
+            _SingalDayTaskFragment = new SingleDayTaskFragment();
+            _WeeklyTaskFragment = new WeeklyTaskFragment();
+        }
 
-	public static TaskFragmentManager getManager() {
-		return _TaskFragmentManager;
-	}
+        private AbsTaskFragment getDefaultTaskFragment() {
 
-	private static final TaskFragmentManager _TaskFragmentManager = new TaskFragmentManager();
-	private static AbsTaskFragment _SingalDayTaskFragment;
-	private static AbsTaskFragment _WeeklyTaskFragment;
-	private static int _CurrentTaskFragmentViewID = -1;
+            return getSingleDayTaskFragment();
+        }
 
-	public static class TaskFragmentManager {
+        private AbsTaskFragment getSingleDayTaskFragment() {
+            _CurrentTaskFragmentViewID = SINGLE_DAY_TASK_VIEW;
+            return _SingalDayTaskFragment;
+        }
 
-		private TaskFragmentManager() {
-			_SingalDayTaskFragment = new SingleDayTaskFragment();
-			_WeeklyTaskFragment = new WeeklyTaskFragment();
-		}
+        private AbsTaskFragment getWeeklyTaskFragment() {
+            _CurrentTaskFragmentViewID = WEEKLY_TASK_VIEW;
+            return _WeeklyTaskFragment;
+        }
 
-		private AbsTaskFragment getDefaultTaskFragment() {
+        public AbsTaskFragment getTaskFragmentByID(int id) {
 
-			return getSingleDayTaskFragment();
-		}
+            switch (id) {
+                case DEFAULT_TASK_VIEW:
+                    return getDefaultTaskFragment();
 
-		private AbsTaskFragment getSingleDayTaskFragment() {
-			_CurrentTaskFragmentViewID = SINGLE_DAY_TASK_VIEW;
-			return _SingalDayTaskFragment;
-		}
+                case SINGLE_DAY_TASK_VIEW:
+                    return getSingleDayTaskFragment();
 
-		private AbsTaskFragment getWeeklyTaskFragment() {
-			_CurrentTaskFragmentViewID = WEEKLY_TASK_VIEW;
-			return _WeeklyTaskFragment;
-		}
+                case WEEKLY_TASK_VIEW:
+                    return getWeeklyTaskFragment();
+            }
+            return null;
+        }
 
-		public AbsTaskFragment getTaskFragmentByID(int id) {
+        public int getCurrentTaskFragmentID() {
+            return _CurrentTaskFragmentViewID;
+        }
 
-			switch (id) {
-			case DEFAULT_TASK_VIEW:
-				return getDefaultTaskFragment();
+        public boolean isCurrentShowTaskView(int current) {
 
-			case SINGLE_DAY_TASK_VIEW:
-				return getSingleDayTaskFragment();
+            return _CurrentTaskFragmentViewID == current;
+        }
 
-			case WEEKLY_TASK_VIEW:
-				return getWeeklyTaskFragment();
-			}
-			return null;
-		}
-
-		public int getCurrentTaskFragmentID() {
-			return _CurrentTaskFragmentViewID;
-		}
-
-		public boolean isCurrentShowTaskView(int current) {
-
-			return _CurrentTaskFragmentViewID == current;
-		}
-
-	}
+    }
 
 }

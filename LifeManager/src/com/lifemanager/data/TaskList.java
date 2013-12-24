@@ -50,15 +50,18 @@ public class TaskList extends ArrayList<Task> implements TaskOrderMode {
     }
 
     public void sort(int sort) {
-        if (sort == _Order || (sort != ORDER_PRIORITY && sort != ORDER_TIME)) {
-            return;
-        }
+//        if (sort == _Order || (sort != ORDER_PRIORITY && sort != ORDER_TIME)) {
+//            return;
+//        }
         switch (sort) {
             case ORDER_PRIORITY:
                 Collections.sort(this, COMP_PRIORITY);
                 break;
             case ORDER_TIME:
                 Collections.sort(this, COMP_TIME);
+                for(int i =0;i<size();i++){
+                    System.out.println(get(i));
+                }
                 break;
         }
 

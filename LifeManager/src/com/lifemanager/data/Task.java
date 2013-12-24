@@ -26,6 +26,14 @@ public interface Task extends TaskPriority, TaskTiming {
      * @return
      */
     public int getPriority();
+    
+    /**
+     * task timing
+     * 
+     * @see TaskTiming
+     * @return
+     */
+    public int getTiming();
 
     /**
      * task Content

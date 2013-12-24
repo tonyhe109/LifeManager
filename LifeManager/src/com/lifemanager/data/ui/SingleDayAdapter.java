@@ -29,7 +29,7 @@ public class SingleDayAdapter extends TaskArrayAdapter {
     public SingleDayAdapter(Context context, TaskList tList) {
         super(context, tList);
     }
-    
+
     @Override
     protected void init() {
         pGroup = new PriorityGroup[3];
@@ -70,17 +70,17 @@ public class SingleDayAdapter extends TaskArrayAdapter {
                             int tempPriority = task.getPriority();
                             if (tempPriority != lastPriority) {
                                 lastPriority = tempPriority;
-                                switch(lastPriority){
+                                switch (lastPriority) {
                                     case TaskPriority.PRIORITY_HIGH:
                                         _AllTaskItems.add(pGroup[0]);
                                         break;
                                     case TaskPriority.PRIORITY_MIDDLE:
-                                        pGroup[0].buildGroup(lastIndex, i-1);
+                                        pGroup[0].buildGroup(lastIndex, i - 1);
                                         lastIndex = i;
                                         _AllTaskItems.add(pGroup[1]);
                                         break;
                                     case TaskPriority.PRIORITY_LOW:
-                                        pGroup[1].buildGroup(lastIndex, i-1);
+                                        pGroup[1].buildGroup(lastIndex, i - 1);
                                         lastIndex = i;
                                         _AllTaskItems.add(pGroup[2]);
                                         break;
@@ -88,13 +88,48 @@ public class SingleDayAdapter extends TaskArrayAdapter {
                             }
                             _AllTaskItems.add(task);
                         }
-                        if(lastIndex!=size-1){
-                            pGroup[2].buildGroup(lastIndex, size-1);
+                        if (lastIndex != size - 1) {
+                            pGroup[2].buildGroup(lastIndex, size - 1);
                         }
                     }
                 }
                 break;
             case ORDER_TIME:
+                synchronized (_Lock) {
+                    int size = _TaskList.size();
+                    if (size > 0) {
+                        System.out.println("################# ORDER_TIME ###################");
+                        _TaskList.sort(ORDER_TIME);
+                        int lastTiming = -1;
+                        int lastIndex = 0;
+                        for (int i = 0; i < size; i++) {
+                            Task task = _TaskList.get(i);
+                            int tempTiming = task.getTiming();
+                            if (tempTiming != lastTiming) {
+                                lastTiming = tempTiming;
+                                switch (lastTiming) {
+                                    case TaskTiming.TIMING_MORNING:
+                                        _AllTaskItems.add(tGroup[0]);
+                                        break;
+                                    case TaskTiming.TIMING_AFTERNOON:
+                                        pGroup[0].buildGroup(lastIndex, i - 1);
+                                        lastIndex = i;
+                                        _AllTaskItems.add(tGroup[1]);
+                                        break;
+                                    case TaskTiming.TIMING_NIGHT:
+                                        pGroup[1].buildGroup(lastIndex, i - 1);
+                                        lastIndex = i;
+                                        _AllTaskItems.add(tGroup[2]);
+                                        break;
+                                }
+                            }
+                            _AllTaskItems.add(task);
+                        }
+                        if (lastIndex != size - 1) {
+                            tGroup[2].buildGroup(lastIndex, size - 1);
+                        }
+                    }
+                }
                 break;
 
         }
@@ -141,13 +176,12 @@ public class SingleDayAdapter extends TaskArrayAdapter {
                     R.layout.line_simple_sd_group, null);
             switch (_Order) {
                 case ORDER_PRIORITY:
-                    PriorityGroup group = (PriorityGroup) viewItem;
+                case ORDER_TIME:
+                    AbsTaskGroup group = (AbsTaskGroup) viewItem;
                     TextView dotPriority = (TextView) line.findViewById(R.id.time_dot_priority);
                     TextView title = (TextView) line.findViewById(R.id.task_priority);
-                    dotPriority.setText(""+group.getCount());
+                    dotPriority.setText("" + group.getCount());
                     title.setText(group.getText());
-                    break;
-                case ORDER_TIME:
                     break;
 
             }

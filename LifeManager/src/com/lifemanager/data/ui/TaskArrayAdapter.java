@@ -54,11 +54,19 @@ public abstract class TaskArrayAdapter extends BaseAdapter implements TaskOrderM
         invalidate();
     }
 
-    protected abstract void init() ;
+    protected abstract void init();
 
     public void setTaskList(TaskList tList) {
         _TaskList = tList;
         invalidate();
+    }
+
+    public void switchOrder() {
+        if (_Order == ORDER_PRIORITY) {
+            setOrder(ORDER_TIME);
+        } else {
+            setOrder(ORDER_PRIORITY);
+        }
     }
 
     public void setOrder(int order) {
@@ -69,6 +77,8 @@ public abstract class TaskArrayAdapter extends BaseAdapter implements TaskOrderM
             _Order = order;
         }
         invalidate();
+        if (_NotifyOnChange)
+            notifyDataSetChanged();
     }
 
     public void setMode(int mode) {

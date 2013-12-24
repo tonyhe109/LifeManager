@@ -5,36 +5,50 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.View.OnClickListener;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
-import android.widget.TextView;
 
-import com.lifemanager.R;
-import com.lifemanager.data.Task;
 import com.lifemanager.data.TaskDataHelper;
 import com.lifemanager.data.TaskList;
-import com.lifemanager.data.TaskPriority;
 import com.lifemanager.data.ui.SingleDayAdapter;
+import com.lifemanager.ui.TaskPanelActivity;
 import com.lifemanager.ui.view.AbsTaskFragment;
 
 public class SingleDayTaskFragment extends AbsTaskFragment {
 
+    private SingleDayAdapter adapter;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-        LOG.debug("SingalDayTaskFragment.onCreateView");
-        return super.onCreateView(inflater, container, savedInstanceState);
+        View view = super.onCreateView(inflater, container, savedInstanceState);
+        // add click logic
+        _button_menu.setOnClickListener(new OnClickListener() {
+            public void onClick(View v) {
+                if (adapter != null) {
+                    LOG.debug("SingleDayAdapter.onMenuActionIconClick");
+                    ((TaskPanelActivity) getActivity()).onMenuActionIconClick();
+                }
+            }
+        });
+
+        _button_switch_mode.setOnClickListener(new OnClickListener() {
+            public void onClick(View v) {
+                LOG.debug("SingleDayAdapter.onMenuActionIconClick");
+                ((TaskPanelActivity) getActivity()).onSwitchModeButtonClick();
+                adapter.switchOrder();
+            }
+        });
+        return view;
     }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        LOG.debug("SingalDayTaskFragment.onActivityCreated");
         _taskPanelTitle.setText("Singal Day Tasks");
-        LOG.debug("TaskFragment.onActivityCreated");
         TaskList tList = new TaskList();
         tList.addArray(TaskDataHelper.getTestTaskArray());
-        BaseAdapter adapter = new SingleDayAdapter(getActivity(), tList);
+        adapter = new SingleDayAdapter(getActivity(), tList);
         _taskListView.setAdapter(adapter);
     }
 
