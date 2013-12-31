@@ -3,7 +3,7 @@ package com.lifemanager.data;
 
 import java.util.Date;
 
-public class LiMaTask implements Task {
+public class LiMaTask implements Task{
 
     private final long _UniqueID;
     protected String _Title = "";
@@ -99,7 +99,7 @@ public class LiMaTask implements Task {
         int hours = _StartTime.getHours();
         //TODO need to improve 
         switch (hours) {
-       
+
             case 0:
             case 1:
             case 2:
@@ -236,5 +236,15 @@ public class LiMaTask implements Task {
         }
         return sb.toString();
 
+    }
+
+    @Override
+    public int getViewItemType() {
+        return TASK_ITEM;
+    }
+
+    @Override
+    public Task getViewItem() {
+        return this;
     }
 }

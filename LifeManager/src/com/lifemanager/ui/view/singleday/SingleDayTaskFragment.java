@@ -4,10 +4,11 @@ package com.lifemanager.ui.view.singleday;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.View.OnClickListener;
-import android.widget.BaseAdapter;
+import android.view.ViewGroup;
+import android.widget.ListView;
 
+import com.lifemanager.R;
 import com.lifemanager.data.TaskDataHelper;
 import com.lifemanager.data.TaskList;
 import com.lifemanager.data.ui.SingleDayAdapter;
@@ -17,11 +18,14 @@ import com.lifemanager.ui.view.AbsTaskFragment;
 public class SingleDayTaskFragment extends AbsTaskFragment {
 
     private SingleDayAdapter adapter;
+    private ListView _taskListView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
         View view = super.onCreateView(inflater, container, savedInstanceState);
+        //
+        _taskListView = (ListView) _MainView.findViewById(R.id.list);
         // add click logic
         _button_menu.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
@@ -31,7 +35,7 @@ public class SingleDayTaskFragment extends AbsTaskFragment {
                 }
             }
         });
-
+        // 
         _button_switch_mode.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
                 LOG.debug("SingleDayAdapter.onMenuActionIconClick");
@@ -39,6 +43,7 @@ public class SingleDayTaskFragment extends AbsTaskFragment {
                 adapter.switchOrder();
             }
         });
+        //_taskListView.onTouchEvent(ev)
         return view;
     }
 

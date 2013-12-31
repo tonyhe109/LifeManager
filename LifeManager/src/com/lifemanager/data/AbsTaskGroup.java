@@ -1,9 +1,7 @@
 
 package com.lifemanager.data;
 
-import com.lifemanager.exception.NotImplementException;
-
-public abstract class AbsTaskGroup implements TaskGroup {
+public abstract class AbsTaskGroup implements TaskGroup, ViewItem<AbsTaskGroup> {
 
     private final int _GruopIndex;
     protected int _Count;
@@ -17,7 +15,7 @@ public abstract class AbsTaskGroup implements TaskGroup {
 
     public void buildGroup(int first, int end) {
         _FirstTaskIndex = first;
-        _Count = (end - first) > 0 ? end - first +1 : 0;
+        _Count = (end - first) > 0 ? end - first + 1 : 0;
     }
 
     @Override
@@ -43,6 +41,16 @@ public abstract class AbsTaskGroup implements TaskGroup {
     @Override
     public int getIconImageRes() {
         return _IconImageRes;
+    }
+
+    @Override
+    public int getViewItemType() {
+        return GROUP_ITEM;
+    }
+
+    @Override
+    public AbsTaskGroup getViewItem() {
+        return this;
     }
 
 }

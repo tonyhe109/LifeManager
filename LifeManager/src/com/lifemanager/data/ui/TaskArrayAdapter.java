@@ -2,7 +2,6 @@
 package com.lifemanager.data.ui;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import android.content.Context;
 import android.view.View;
@@ -12,6 +11,7 @@ import android.widget.BaseAdapter;
 import com.lifemanager.data.Task;
 import com.lifemanager.data.TaskList;
 import com.lifemanager.data.TaskOrderMode;
+import com.lifemanager.data.ViewItem;
 import com.lifemanager.exception.NotImplementException;
 
 /**
@@ -23,11 +23,11 @@ public abstract class TaskArrayAdapter extends BaseAdapter implements TaskOrderM
     protected TaskList _TaskList = null;
     protected int _Order = ORDER_PRIORITY;
     protected int _Mode = MODE_SIMPLE;
-    protected List _AllTaskItems;
+    protected ArrayList<ViewItem> _AllTaskItems;
     protected Object _Lock = new Object();
     protected Context _Context;
 
-    protected ArrayList _OriginalItems;
+    protected ArrayList<ViewItem> _OriginalItems;
 
     // TODO add task filter , as the task have many status ...
 
@@ -40,7 +40,7 @@ public abstract class TaskArrayAdapter extends BaseAdapter implements TaskOrderM
     public TaskArrayAdapter(Context context, TaskList tList) {
         _Context = context;
         _TaskList = tList;
-        _AllTaskItems = new ArrayList();
+        _AllTaskItems = new ArrayList<ViewItem>();
         init();
         invalidate();
     }
@@ -49,7 +49,7 @@ public abstract class TaskArrayAdapter extends BaseAdapter implements TaskOrderM
         _Context = context;
         _Order = order;
         _TaskList = tList;
-        _AllTaskItems = new ArrayList();
+        _AllTaskItems = new ArrayList<ViewItem>();
         init();
         invalidate();
     }
@@ -141,8 +141,8 @@ public abstract class TaskArrayAdapter extends BaseAdapter implements TaskOrderM
             int index = -1;
             int size = _AllTaskItems.size();
             for (int i = 0; i < size; i++) {
-                Object item = _AllTaskItems.get(i);
-                if (item instanceof Task && item.equals(task)) {
+                ViewItem item = _AllTaskItems.get(i);
+                if (item.getViewItemType() == ViewItem.TASK_ITEM && item.getViewItem().equals(task)) {
                     index = i;
                     break;
                 }

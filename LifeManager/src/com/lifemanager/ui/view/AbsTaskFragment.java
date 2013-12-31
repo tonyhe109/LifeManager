@@ -25,22 +25,21 @@ public abstract class AbsTaskFragment extends Fragment {
 
     protected static final Logger LOG = Logger.getLogger(TAG);
 
+    protected View _MainView;
     protected ImageView _button_switch_mode;
     protected ImageView _button_menu;
     protected TextView _taskPanelTitle;
-    protected ListView _taskListView;
     protected int _TaskFragmentID = -1;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
         LOG.debug("TaskFragment.onCreateView");
-        View mView = inflater.inflate(R.layout.task_frame, null);
-        _button_switch_mode = (ImageView) mView
+        _MainView = inflater.inflate(R.layout.task_frame, null);
+        _button_switch_mode = (ImageView) _MainView
                 .findViewById(R.id.ic_switch_mode);
-        _button_menu = (ImageView) mView.findViewById(R.id.ic_menu);
-        _taskPanelTitle = (TextView) mView.findViewById(R.id.iv_title);
-        _taskListView = (ListView) mView.findViewById(R.id.list);
-        return mView;
+        _button_menu = (ImageView) _MainView.findViewById(R.id.ic_menu);
+        _taskPanelTitle = (TextView) _MainView.findViewById(R.id.iv_title);
+        return _MainView;
     }
 
     public void onActivityCreated(Bundle savedInstanceState) {
