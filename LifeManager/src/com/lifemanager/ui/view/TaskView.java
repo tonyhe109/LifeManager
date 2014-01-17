@@ -1,17 +1,10 @@
 package com.lifemanager.ui.view;
 
-import java.util.ArrayList;
-
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
 public class TaskView {
-	
-	
-	
-	
-	
 
 	private class OneDayAdapter extends BaseAdapter{
 
@@ -38,6 +31,8 @@ public class TaskView {
 			
 			return null;
 		}
+		
+		
 	}
 
 }

@@ -219,8 +219,11 @@ public class SingleDayAdapter<ViewItem> extends TaskArrayAdapter {
         @Override
         public boolean onTouch(View v, MotionEvent event) {
             
-            System.out.println("==onTouch==v:"+v+"==event:"+event);
             
+            
+            
+            
+            System.out.println("==onTouch==v:"+v+"==event:"+event);
             return true;
         }
         
