@@ -1,4 +1,4 @@
-package com.lifemanager.improve;
+package tony.support.improve;
 
 public interface Collector {
 	

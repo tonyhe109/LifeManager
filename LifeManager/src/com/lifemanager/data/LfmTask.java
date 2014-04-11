@@ -3,7 +3,7 @@ package com.lifemanager.data;
 
 import java.util.Date;
 
-public class LiMaTask implements Task{
+public class LfmTask implements Task {
 
     private final long _UniqueID;
     protected String _Title = "";
@@ -22,7 +22,7 @@ public class LiMaTask implements Task{
      * 
      * @param priority
      */
-    public LiMaTask(int priority) {
+    public LfmTask(int priority) {
         _UniqueID = System.currentTimeMillis();
         _Priority = priority;
         // set start time
@@ -40,7 +40,7 @@ public class LiMaTask implements Task{
      * 
      * @param start
      */
-    public LiMaTask(Date start) {
+    public LfmTask(Date start) {
         _UniqueID = System.currentTimeMillis();
         _Priority = UserPerfernce.getDefaultTaskPriority();
         // set start time
@@ -57,8 +57,8 @@ public class LiMaTask implements Task{
      * @param priority
      * @param start
      */
-    public LiMaTask(int priority, Date start) {
-        _UniqueID = System.currentTimeMillis();
+    public LfmTask(int priority, Date start) {
+        _UniqueID = System.currentTimeMillis()+Math.round(1000);
         _Priority = priority;
         // set start time
         _StartTime = start;
@@ -74,8 +74,26 @@ public class LiMaTask implements Task{
      * @param priority
      * @param start
      */
-    public LiMaTask(int priority, Date start, String title) {
+    public LfmTask(int priority, Date start, String title) {
         this(priority, start);
+        _Title = title;
+    }
+
+    /**
+     * LmTask constructor<br>
+     * <b>End Time</b> set by default duration & start time .
+     * 
+     * @param priority
+     * @param start
+     */
+    public LfmTask(long id, int priority, long start, long end, String title) {
+        //this value should only be from Database
+        _UniqueID = id;
+        _Priority = priority;
+        _StartTime = new Date(start);
+        _EndTime = new Date(end);
+        //
+        _Duration = (int) (_EndTime.getTime() - _StartTime.getTime());
         _Title = title;
     }
 
@@ -127,7 +145,7 @@ public class LiMaTask implements Task{
             case 22:
             case 23:
             case 24:
-                return TaskTiming.TIMING_AFTERNOON;
+                return TaskTiming.TIMING_NIGHT;
 
         }
         return _Priority;

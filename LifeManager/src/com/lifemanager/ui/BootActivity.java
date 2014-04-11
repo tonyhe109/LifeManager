@@ -12,6 +12,7 @@ import android.os.Build;
 import android.os.Bundle;
 
 import com.lifemanager.R;
+import com.lifemanager.data.database.DataBaseManager;
 import com.lifemanager.logging.Logger;
 
 public class BootActivity extends BaseActivity {
@@ -88,6 +89,9 @@ public class BootActivity extends BaseActivity {
 
 		@Override
 		protected Boolean doInBackground(Void... params) {
+		    //build up database.
+		    new DataBaseManager(BootActivity.this);
+		    //
 			// Util.getPeerid(BootActivity.this);
 			// Util.getSelfAppVersion(BootActivity.this);
 			// Util.getIMEI(BootActivity.this);

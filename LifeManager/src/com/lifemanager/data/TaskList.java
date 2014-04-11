@@ -30,14 +30,16 @@ public class TaskList extends ArrayList<Task> implements TaskOrderMode {
     }
 
     public void addArray(Task[] array) {
-        int length = array.length;
-        for (int i = 0; i < length; i++) {
+        if(array == null || array.length == 0)
+            return ;
+        for (int i = 0; i < array.length; i++) {
             add(array[i]);
         }
         invalidate();
     }
 
     protected void invalidate() {
+        System.out.println("<invalidate>");
         System.out.println("Task List invalidate ... ");
         switch (_Order) {
             case ORDER_PRIORITY:
@@ -47,6 +49,7 @@ public class TaskList extends ArrayList<Task> implements TaskOrderMode {
                 Collections.sort(this, COMP_TIME);
                 break;
         }
+        System.out.println("</invalidate>");
     }
 
     public void sort(int sort) {

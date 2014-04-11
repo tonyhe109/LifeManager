@@ -1,4 +1,4 @@
-package com.lifemanager.core.ui;
+package tony.support.core.ui;
 
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;

@@ -132,6 +132,37 @@
                 android:layout_height="1dip"
                 android:background="#333333"
                 android:clickable="false" />
+
+            <LinearLayout
+                android:id="@+id/button_dhelper"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_menu_layout_button_heigth"
+                android:clickable="true" >
+
+                <ImageView
+                    android:layout_width="@dimen/dimen_menu_layout_button_size"
+                    android:layout_height="@dimen/dimen_menu_layout_button_size"
+                    android:layout_gravity="center"
+                    android:layout_weight="0.1"
+                    android:gravity="center"
+                    android:scaleType="fitStart"
+                    android:src="@drawable/abs__dhelper" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="0.9"
+                    android:text="@string/button_text_dhelper"
+                    android:textColor="#000"
+                    android:textSize="@dimen/dimen_menu_layout_text_size" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="@dimen/dimen_menu_layout_width"
+                android:layout_height="1dip"
+                android:background="#333333"
+                android:clickable="false" />
         </LinearLayout>
     </ScrollView>
 

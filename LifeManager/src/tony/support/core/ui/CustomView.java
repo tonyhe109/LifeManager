@@ -1,4 +1,4 @@
-package com.lifemanager.core.ui;
+package tony.support.core.ui;
 
 import android.view.View;
 

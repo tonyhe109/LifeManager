@@ -1,5 +1,5 @@
 
-package com.lifemanager.data.ui;
+package com.lifemanager.ui.view.singleday;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -20,6 +20,7 @@ import com.lifemanager.data.TaskPriority;
 import com.lifemanager.data.TaskTiming;
 import com.lifemanager.data.TimingGroup;
 import com.lifemanager.exception.NotImplementException;
+import com.lifemanager.ui.view.TaskArrayAdapter;
 
 public class SingleDayAdapter<ViewItem> extends TaskArrayAdapter {
 
@@ -155,6 +156,9 @@ public class SingleDayAdapter<ViewItem> extends TaskArrayAdapter {
         //
         Object viewItem = getItem(position);
         //
+        if(viewItem == null){
+            return buildNoTask(parent.getContext());
+        }
         if (viewItem instanceof Task) {
             convertView = buildTaskLine(parent.getContext(), (Task) viewItem);
         } else if (viewItem instanceof AbsTaskGroup) {
@@ -162,6 +166,13 @@ public class SingleDayAdapter<ViewItem> extends TaskArrayAdapter {
         }
         return convertView;
 
+    }
+    
+    private View buildNoTask(Context context){
+        View line = null;
+        line = LayoutInflater.from(context).inflate(
+                R.layout.task_panel_no_item, null);
+        return line;
     }
 
     private View buildTaskLine(Context context, Task task) {

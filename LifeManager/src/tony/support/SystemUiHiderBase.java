@@ -1,4 +1,4 @@
-package com.lifemanager.util;
+package tony.support;
 
 import android.app.Activity;
 import android.view.View;

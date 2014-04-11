@@ -1,5 +1,5 @@
 
-package com.lifemanager.data.ui;
+package com.lifemanager.ui.view;
 
 import android.content.Context;
 import android.graphics.Canvas;

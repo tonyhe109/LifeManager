@@ -1,7 +1,10 @@
-package com.lifemanager.core.ui;
+package tony.support.core.ui;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import tony.support.core.ui.SlidingMenu.OnClosedListener;
+import tony.support.core.ui.SlidingMenu.OnOpenedListener;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -26,8 +29,6 @@ import android.view.ViewGroup;
 import android.view.animation.Interpolator;
 import android.widget.Scroller;
 
-import com.lifemanager.core.ui.SlidingMenu.OnClosedListener;
-import com.lifemanager.core.ui.SlidingMenu.OnOpenedListener;
 
 public class CustomViewAbove extends ViewGroup {
 

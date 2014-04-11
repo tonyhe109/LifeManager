@@ -1,5 +1,5 @@
 
-package com.lifemanager.data.ui;
+package com.lifemanager.ui.view;
 
 import java.util.ArrayList;
 
@@ -8,11 +8,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
+import com.lifemanager.LfmConstant;
 import com.lifemanager.data.Task;
 import com.lifemanager.data.TaskList;
 import com.lifemanager.data.TaskOrderMode;
 import com.lifemanager.data.ViewItem;
 import com.lifemanager.exception.NotImplementException;
+import com.lifemanager.logging.Logger;
 
 /**
  * @author tony.he
@@ -20,6 +22,7 @@ import com.lifemanager.exception.NotImplementException;
  */
 public abstract class TaskArrayAdapter extends BaseAdapter implements TaskOrderMode {
 
+    private static final Logger LOG = Logger.getLogger(LfmConstant.LOGGER_UI_ADAPTER);
     protected TaskList _TaskList = null;
     protected int _Order = ORDER_PRIORITY;
     protected int _Mode = MODE_SIMPLE;
@@ -188,6 +191,10 @@ public abstract class TaskArrayAdapter extends BaseAdapter implements TaskOrderM
 
     @Override
     public Object getItem(int position) {
+        if (_AllTaskItems.size() == 0) {
+            LOG.warn("_AllTaskItems size = 0");
+            return null;
+        }
         return _AllTaskItems.get(position);
     }
 

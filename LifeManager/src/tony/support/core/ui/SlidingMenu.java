@@ -1,6 +1,8 @@
-package com.lifemanager.core.ui;
+package tony.support.core.ui;
 
 import java.lang.reflect.Method;
+
+import tony.support.core.ui.CustomViewAbove.OnPageChangeListener;
 
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
@@ -28,7 +30,6 @@ import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 
 import com.lifemanager.R;
-import com.lifemanager.core.ui.CustomViewAbove.OnPageChangeListener;
 
 public class SlidingMenu extends RelativeLayout {
 

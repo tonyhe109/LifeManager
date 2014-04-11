@@ -1,4 +1,4 @@
-package com.lifemanager.util;
+package tony.support;
 
 import android.annotation.TargetApi;
 import android.app.Activity;

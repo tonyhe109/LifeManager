@@ -1,9 +1,9 @@
-package com.lifemanager.core.ui;
+package tony.support.core.ui;
 
+import tony.support.core.ui.SlidingMenu.CanvasTransformer;
 import android.graphics.Canvas;
 import android.view.animation.Interpolator;
 
-import com.lifemanager.core.ui.SlidingMenu.CanvasTransformer;
 
 public class CanvasTransformerBuilder {
 

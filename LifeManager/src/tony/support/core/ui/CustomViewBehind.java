@@ -1,5 +1,6 @@
-package com.lifemanager.core.ui;
+package tony.support.core.ui;
 
+import tony.support.core.ui.SlidingMenu.CanvasTransformer;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -14,7 +15,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.lifemanager.R;
-import com.lifemanager.core.ui.SlidingMenu.CanvasTransformer;
 
 public class CustomViewBehind extends ViewGroup {
 
